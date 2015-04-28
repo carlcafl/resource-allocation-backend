@@ -36,6 +36,11 @@
 			<artifactId>spring-web</artifactId>
 			<version>4.1.6.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>com.sura.it.management.platforms</groupId>
+			<artifactId>model</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>resourceAllocation</finalName>

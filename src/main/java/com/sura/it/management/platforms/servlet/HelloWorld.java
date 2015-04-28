@@ -1,4 +1,4 @@
-package co.com.sura.it.management.platforms.servlet;
+package com.sura.it.management.platforms.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
