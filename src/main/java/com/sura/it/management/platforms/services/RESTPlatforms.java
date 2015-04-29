@@ -18,6 +18,7 @@ public class RESTPlatforms {
 	//@Consumes( "application/json" )
 	@Produces( "application/json" ) 
 	public List<Platform> list() {
+		System.out.println(this.getClass().getName() + "--> Entró");
 		List<Platform> list = new ArrayList<Platform>();
 		
 		Platform p = new Platform();

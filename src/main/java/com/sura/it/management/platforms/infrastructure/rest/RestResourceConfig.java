@@ -10,6 +10,7 @@ public class RestResourceConfig extends ResourceConfig {
 
 	public RestResourceConfig()
 	{
+		System.out.println(this.getClass().getName() + "--> Entró");
 		packages("com.sura.it.management.platforms.rest,com.sura.it.management.platforms.util");
 		register(JacksonFeature.class);
 		register(org.glassfish.jersey.server.mvc.jsp.JspMvcFeature.class);
