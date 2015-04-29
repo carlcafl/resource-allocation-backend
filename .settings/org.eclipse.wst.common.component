@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="resourceAllocation">
+    <wb-module deploy-name="resourceAllocationBackend">
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
-        <property name="context-root" value="resourceAllocation"/>
-        <property name="java-output-path" value="/resourceAllocation/target/classes"/>
+        <property name="java-output-path" value="/resourceAllocationBackend/target/classes"/>
+        <property name="context-root" value="resourceAllocationBackend"/>
     </wb-module>
 </project-modules>
