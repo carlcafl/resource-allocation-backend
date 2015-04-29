@@ -332,22 +332,21 @@
 	easily refer from these tool-specific files to the information in the standard 
 	deployment descriptor. Tools are not allowed to add the non-standard information 
 	into the standard deployment descriptor. -->
-<web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee"
-	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-	<display-name>Sura Platform Resource Allocation</display-name>
-	<javaee:display-name>Sura Platform Resource Allocation
+<web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <javaee:display-name>Sura Platform Resource Allocation</javaee:display-name>
+  <javaee:display-name>Sura Platform Resource Allocation
 	</javaee:display-name>
-	<servlet>
-		<servlet-name>Jersey REST Service</servlet-name>
-		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-		<init-param>
-			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>com.sura.it.management.platforms.infrastructure.rest.RestResourceConfig</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Jersey REST Service</servlet-name>
-		<url-pattern>/api/rest/*</url-pattern>
-	</servlet-mapping>
+  <servlet>
+    <servlet-name>Jersey REST Service</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <javaee:param-name>javax.ws.rs.Application</javaee:param-name>
+      <javaee:param-value>com.sura.it.management.platforms.infrastructure.rest.RestResourceConfig</javaee:param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey REST Service</servlet-name>
+    <url-pattern>/api/rest/*</url-pattern>
+  </servlet-mapping>
 </web-app>

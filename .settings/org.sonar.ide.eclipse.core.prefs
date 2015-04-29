@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
 extraProperties=
-projectKey=com.sura.it.management.platforms\:resourceAllocation
+projectKey=com.sura.it.management.platforms\:resourceAllocationBackend
 serverUrl=http\://localhost\:9000
 version=2
