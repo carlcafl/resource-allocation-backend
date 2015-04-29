@@ -16,20 +16,40 @@ public class RESTPlatforms {
 
 	
 	@GET
+	@Path("/")
+	//@Consumes( "application/json" )
+	@Produces( "application/json" ) 
+	public List<Platform> listPlatforms() {
+		List<Platform> list = new ArrayList<Platform>();
+
+		Platform p = new Platform();
+		p.setId(1);
+		p.setName("Core de Seguros");
+		p.setShortName("CORE_SEG");				
+		list.add(p);
+ 
+		Platform p2 = new Platform();
+		p2.setId(2);
+		p2.setName("Automatización de Procesos");
+		p2.setShortName("AUTOM_PROC");
+		list.add(p2);
+		
+		return list;
+	}
+
+	@GET
 	@Path("/{id}")
 	//@Consumes( "application/json" )
 	@Produces( "application/json" ) 
-	public List<Platform> getPlatforms(@PathParam("id") String id) {
+	public List<Platform> getPlatform(@PathParam("id") String id) {
 		List<Platform> list = new ArrayList<Platform>();
-		if (id==null || "1".equals(id)) {
+		if ("1".equals(id)) {
 			Platform p = new Platform();
 			p.setId(1);
 			p.setName("Core de Seguros");
 			p.setShortName("CORE_SEG");				
 			list.add(p);
-		}
-		
+		}		
 		return list;
 	}
-
 }
