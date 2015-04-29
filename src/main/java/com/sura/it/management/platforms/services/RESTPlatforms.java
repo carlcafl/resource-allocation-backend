@@ -25,18 +25,6 @@ public class RESTPlatforms {
 	public List<Platform> listPlatforms() throws URISyntaxException, SQLException {
 		List<Platform> list = new ArrayList<Platform>();
 
-//		Platform p = new Platform();
-//		p.setId(1);
-//		p.setName("Core de Seguros");
-//		p.setShortName("CORE_SEG");				
-//		list.add(p);
-// 
-//		Platform p2 = new Platform();
-//		p2.setId(2);
-//		p2.setName("Automatización de Procesos");
-//		p2.setShortName("AUTOM_PROC");
-//		list.add(p2);
-		
 		list = PlatformsDataAccess.listPlatforms();
 		
 		return list;
@@ -46,15 +34,9 @@ public class RESTPlatforms {
 	@Path("/{id}")
 	//@Consumes( "application/json" )
 	@Produces( "application/json" ) 
-	public List<Platform> getPlatform(@PathParam("id") String id) {
-		List<Platform> list = new ArrayList<Platform>();
-		if ("1".equals(id)) {
-			Platform p = new Platform();
-			p.setId(1);
-			p.setName("Core de Seguros");
-			p.setShortName("CORE_SEG");				
-			list.add(p);
-		}		
-		return list;
+	public Platform getPlatform(@PathParam("id") int id) throws URISyntaxException, SQLException {
+		Platform platform = new Platform();
+		PlatformsDataAccess.getPlatformById(id);
+		return platform;
 	}
 }
