@@ -1,5 +1,7 @@
 package com.sura.it.management.platforms.services;
 
+import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import com.sura.it.management.platforms.dataAccess.PlatformsDataAccess;
 import com.sura.it.management.platforms.model.Platform;
 
 @Path("/platforms")
@@ -19,20 +22,22 @@ public class RESTPlatforms {
 	@Path("/")
 	//@Consumes( "application/json" )
 	@Produces( "application/json" ) 
-	public List<Platform> listPlatforms() {
+	public List<Platform> listPlatforms() throws URISyntaxException, SQLException {
 		List<Platform> list = new ArrayList<Platform>();
 
-		Platform p = new Platform();
-		p.setId(1);
-		p.setName("Core de Seguros");
-		p.setShortName("CORE_SEG");				
-		list.add(p);
- 
-		Platform p2 = new Platform();
-		p2.setId(2);
-		p2.setName("Automatización de Procesos");
-		p2.setShortName("AUTOM_PROC");
-		list.add(p2);
+//		Platform p = new Platform();
+//		p.setId(1);
+//		p.setName("Core de Seguros");
+//		p.setShortName("CORE_SEG");				
+//		list.add(p);
+// 
+//		Platform p2 = new Platform();
+//		p2.setId(2);
+//		p2.setName("Automatización de Procesos");
+//		p2.setShortName("AUTOM_PROC");
+//		list.add(p2);
+		
+		list = PlatformsDataAccess.listPlatforms();
 		
 		return list;
 	}
