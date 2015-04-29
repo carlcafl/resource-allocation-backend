@@ -4,7 +4,7 @@
 	<groupId>com.sura.it.management.platforms</groupId>
 	<artifactId>resourceAllocationBackend</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>resource-allocation-backend</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>

@@ -11,12 +11,12 @@ import javax.ws.rs.Produces;
 
 import com.sura.it.management.platforms.model.Platform;
 
-
+@Path("/platforms")
 public class RESTPlatforms {
 
 	
 	@GET
-	@Path("/platforms/{id}")
+	@Path("/{id}")
 	//@Consumes( "application/json" )
 	@Produces( "application/json" ) 
 	public List<Platform> getPlatforms(@PathParam("id") String id) {
