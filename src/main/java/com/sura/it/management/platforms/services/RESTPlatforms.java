@@ -26,6 +26,8 @@ public class RESTPlatforms {
 		p.setName("Core de Seguros");
 		p.setShortName("CORE_SEG");
 		
+		list.add(p);
+		
 		return list;
 	}
 
