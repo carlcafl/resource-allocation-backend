@@ -35,8 +35,6 @@ public class RESTPlatforms {
 	//@Consumes( "application/json" )
 	@Produces( "application/json" ) 
 	public Platform getPlatform(@PathParam("id") int id) throws URISyntaxException, SQLException {
-		Platform platform = new Platform();
-		PlatformsDataAccess.getPlatformById(id);
-		return platform;
+		return PlatformsDataAccess.getPlatformById(id);
 	}
 }

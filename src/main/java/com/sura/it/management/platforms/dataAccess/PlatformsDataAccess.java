@@ -25,7 +25,7 @@ public class PlatformsDataAccess {
 			ResultSet rs = stmt.executeQuery(LIST_PLATFORMS_SQL);
 			while (rs.next()) {
 				Platform platform = new Platform();
-				platform.setId(rs.getLong("id"));
+				platform.setId(rs.getInt("id"));
 				platform.setShortName(rs.getString("shortName"));
 				platform.setName(rs.getString("fullName"));
 				platform.setDepartment(rs.getString("department"));
@@ -50,9 +50,11 @@ public class PlatformsDataAccess {
 		try {
 			connection = DataServiceHelper.getInstance().getConnection();
 			Statement stmt = connection.createStatement();
+			System.out.println(GET_PLATFORMS_BY_ID_SQL + Integer.toString(id));
 			ResultSet rs = stmt.executeQuery(GET_PLATFORMS_BY_ID_SQL + Integer.toString(id));
 			while (rs.next()) {
-				platform.setId(rs.getLong("id"));
+				platform = new Platform();
+				platform.setId(rs.getInt("id"));
 				platform.setShortName(rs.getString("shortName"));
 				platform.setName(rs.getString("fullName"));
 				platform.setDepartment(rs.getString("department"));

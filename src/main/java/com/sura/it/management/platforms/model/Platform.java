@@ -2,17 +2,17 @@ package com.sura.it.management.platforms.model;
 
 public class Platform {
 	
-	private long id;
+	private int id;
 	private String shortName;
 	private String name;
 	private String department;
 	private String owner;
 	private String ownerEmail;
 	
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getShortName() {
