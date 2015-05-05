@@ -7,7 +7,7 @@ import java.util.ArrayList;;
 public class Project {
 
 	private int id;
-	private String projectName;
+	private String name;
 	private String leader;
 	private Date start;
 	private Date finish;
@@ -20,11 +20,11 @@ public class Project {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getProjectName() {
-		return projectName;
+	public String getName() {
+		return name;
 	}
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getLeader() {
 		return leader;

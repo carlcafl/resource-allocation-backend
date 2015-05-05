@@ -29,7 +29,7 @@ public class RESTProjects extends RESTService {
 		
 		Project a = new Project();
 		a.setId(1);
-		a.setProjectName("Evaluación del Core");
+		a.setName("Evaluación del Core");
 		a.setLeader("David Cardona");
 		a.setSize(ProjectSize.XLARGE);
 		Platform p = PlatformsDataAccess.getPlatformById(1);
@@ -41,7 +41,7 @@ public class RESTProjects extends RESTService {
 
 		Project b = new Project();
 		b.setId(2);
-		b.setProjectName("Rediseño MVEE Autos");
+		b.setName("Rediseño MVEE Autos");
 		b.setLeader("Mildred Marín");
 		b.setSize(ProjectSize.LARGE);
 		Platform p2 = PlatformsDataAccess.getPlatformById(2);
@@ -49,6 +49,7 @@ public class RESTProjects extends RESTService {
 		pp2.setPlatform(p2);
 		pp2.setSize(ProjectSize.LARGE);
 		b.addPlatformInvolved(pp2);
+		b.addPlatformInvolved(pp);
 
 		list.add(a);
 		list.add(b);
