@@ -1,5 +1,7 @@
 package com.sura.it.management.platforms.model;
 
+import java.util.List;
+
 public class Platform {
 	
 	private int id;
@@ -8,6 +10,7 @@ public class Platform {
 	private String department;
 	private String owner;
 	private String ownerEmail;
+	private List<Component> components = null;
 	
 	public int getId() {
 		return id;
@@ -44,6 +47,12 @@ public class Platform {
 	}
 	public void setOwnerEmail(String ownerEmail) {
 		this.ownerEmail = ownerEmail;
+	}
+	public List<Component> getComponents() {
+		return components;
+	}
+	public void setComponents(List<Component> components) {
+		this.components = components;
 	}
 
 }
