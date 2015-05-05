@@ -40,10 +40,10 @@ public class RESTProjects extends RESTService {
 		
 
 		Project b = new Project();
-		a.setId(2);
-		a.setProjectName("Rediseño MVEE Autos");
-		a.setLeader("Mildred Marín");
-		a.setSize(ProjectSize.LARGE);
+		b.setId(2);
+		b.setProjectName("Rediseño MVEE Autos");
+		b.setLeader("Mildred Marín");
+		b.setSize(ProjectSize.LARGE);
 		Platform p2 = PlatformsDataAccess.getPlatformById(2);
 		ProjectPlatform pp2 = new ProjectPlatform();
 		pp2.setPlatform(p2);
