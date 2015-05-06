@@ -8,9 +8,13 @@ public class Project {
 
 	private int id;
 	private String name;
-	private String leader;
+	private Platform leaderPlatform;
+	private String leadAnalyst;
+	private String leadAnalystEmail;
 	private Date start;
 	private Date finish;
+	//TODO: Definir tipo de dato
+	private String status;
 	private ProjectSize size;
 	private List<ProjectPlatform> platformsInvolved;
 	
@@ -26,11 +30,11 @@ public class Project {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getLeader() {
-		return leader;
+	public Platform getLeaderPlatform() {
+		return leaderPlatform;
 	}
-	public void setLeader(String leader) {
-		this.leader = leader;
+	public void setLeadPlatform(Platform leaderPlatform) {
+		this.leaderPlatform = leaderPlatform;
 	}
 	public Date getStart() {
 		return start;
@@ -61,5 +65,17 @@ public class Project {
 			this.setPlatformsInvolved(new ArrayList<ProjectPlatform>());
 		}
 		this.getPlatformsInvolved().add(platform);
+	}
+	public String getLeadAnalyst() {
+		return leadAnalyst;
+	}
+	public void setLeadAnalyst(String leadAnalyst) {
+		this.leadAnalyst = leadAnalyst;
+	}
+	public String getLeadAnalystEmail() {
+		return leadAnalystEmail;
+	}
+	public void setLeadAnalystEmail(String leadAnalystEmail) {
+		this.leadAnalystEmail = leadAnalystEmail;
 	}
 }
