@@ -65,7 +65,6 @@ public class PlatformsDataAccess {
 		Platform platform = null;
 
 			Statement stmt = connection.createStatement();
-			System.out.println(GET_PLATFORMS_BY_ID_SQL + Integer.toString(id));
 			ResultSet rs = stmt.executeQuery(GET_PLATFORMS_BY_ID_SQL + Integer.toString(id));
 			while (rs.next()) {
 				platform = new Platform();
@@ -88,8 +87,7 @@ public class PlatformsDataAccess {
 			connection = DataServiceHelper.getInstance().getConnection();
 			Statement stmt = connection.createStatement();
 			
-			String sql = INSERT_PLATFORM_SQL;
-			sql.replaceAll("{{values}}", "'" + platform.getShortName() + "','" + platform.getName() + "','" + platform.getDepartment() + "','" + platform.getOwner() + "','" + platform.getOwnerEmail() + "'" );
+			String sql = INSERT_PLATFORM_SQL.replace("{{values}}", "'" + platform.getShortName() + "','" + platform.getName() + "','" + platform.getDepartment() + "','" + platform.getOwner() + "','" + platform.getOwnerEmail() + "'" );
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
@@ -103,5 +101,5 @@ public class PlatformsDataAccess {
 				}
 		}
 		return id;
-	}
+	}	
 }
