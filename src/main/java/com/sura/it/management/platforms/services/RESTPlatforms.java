@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,7 +17,6 @@ import javax.ws.rs.core.Response;
 
 import com.sura.it.management.platforms.dataAccess.PlatformsDataAccess;
 import com.sura.it.management.platforms.model.Platform;
-//import javax.ws.rs.Consumes;
 
 @Path("/platforms")
 public class RESTPlatforms extends RESTService {
@@ -48,11 +46,19 @@ public class RESTPlatforms extends RESTService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_HTML)
 	public Response addNew(Platform platform) throws URISyntaxException, SQLException {	
+		processResponse();
 		int id = PlatformsDataAccess.insertNewPlatform(platform);
 		platform.setId(id);
+		return Response.status(Response.Status.CREATED)
+				.header("Location", "/platforms/" + id)
+				.entity("/platforms/" + id).build();
+	}
+
+	@OPTIONS
+	@Path("/")
+	public Response doOptions() {
 		processResponse();
-		response.addHeader("Location", "/platforms/" + id);
-		return Response.status(201).entity("/platforms/" + id).build();
+		return Response.ok().build();
 	}
 	
 }
