@@ -14,6 +14,7 @@ public class PlatformsDataAccess {
 
 	private static final String LIST_PLATFORMS_SQL = "SELECT * FROM tblPlatforms";
 	private static final String GET_PLATFORMS_BY_ID_SQL = "SELECT * FROM tblPlatforms WHERE id = ";
+	private static final String INSERT_PLATFORM_SQL = "INSERT INTO tblPlatforms (shortName, fullName, department, owner, ownerEmail) VALUES ({{values}}) RETURNING id";
 
 	public static List<Platform> listPlatforms() throws URISyntaxException, SQLException {
 		List<Platform> list = new ArrayList<Platform>();
@@ -49,6 +50,20 @@ public class PlatformsDataAccess {
 		Connection connection = null;
 		try {
 			connection = DataServiceHelper.getInstance().getConnection();
+			platform = getPlatformById(id, connection);
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
+		}
+		return platform;
+	}
+	
+	protected static Platform getPlatformById(int id, Connection connection) throws URISyntaxException, SQLException {
+		Platform platform = null;
+
 			Statement stmt = connection.createStatement();
 			System.out.println(GET_PLATFORMS_BY_ID_SQL + Integer.toString(id));
 			ResultSet rs = stmt.executeQuery(GET_PLATFORMS_BY_ID_SQL + Integer.toString(id));
@@ -62,6 +77,24 @@ public class PlatformsDataAccess {
 				platform.setOwnerEmail(rs.getString("ownerEmail"));
 				break;
 			}
+		return platform;
+	}
+	
+	public static int insertNewPlatform(Platform platform) throws URISyntaxException, SQLException {
+		int id = 0;
+
+		Connection connection = null;
+		try {
+			connection = DataServiceHelper.getInstance().getConnection();
+			Statement stmt = connection.createStatement();
+			
+			String sql = INSERT_PLATFORM_SQL;
+			sql.replaceAll("{{values}}", "'" + platform.getShortName() + "','" + platform.getName() + "','" + platform.getDepartment() + "','" + platform.getOwner() + "','" + platform.getOwnerEmail() + "'" );
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while (rs.next()) {
+				id = rs.getInt("id");
+			}
 		} finally {
 			if (connection != null)
 				try {
@@ -69,7 +102,6 @@ public class PlatformsDataAccess {
 				} catch (SQLException e) {
 				}
 		}
-		return platform;
-		
+		return id;
 	}
 }

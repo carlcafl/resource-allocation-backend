@@ -29,8 +29,7 @@ public class ProjectsDataAccess {
 				project.setName( rs.getString("name") );
 				project.setLeadAnalyst( rs.getString("leadAnalyst") );
 				project.setLeadAnalystEmail( rs.getString("leadAnalystEmail") );
-				//TODO: Mejorar consulta
-				project.setLeadPlatform( PlatformsDataAccess.getPlatformById(rs.getInt("platformId"))  );
+				project.setLeadPlatform( PlatformsDataAccess.getPlatformById(rs.getInt("platformId"), connection) );
 				project.setSize( ProjectSize.valueOf(rs.getString("size")) );
 				project.setStart( rs.getDate("startDate") );
 				project.setFinish( rs.getDate("endDate") );

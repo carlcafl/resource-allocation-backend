@@ -6,7 +6,7 @@ import javax.ws.rs.core.Context;
 public abstract class RESTService {
 
 	@Context
-	private HttpServletResponse response;
+	protected HttpServletResponse response;
 	
 	protected void processResponse() {
 		response.addHeader("Access-Control-Allow-Origin", "*");

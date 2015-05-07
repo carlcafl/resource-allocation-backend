@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -37,6 +39,18 @@ public class RESTPlatforms extends RESTService {
 	public Platform getPlatform(@PathParam("id") int id) throws URISyntaxException, SQLException {
 		processResponse();
 		return PlatformsDataAccess.getPlatformById(id);
+	}
+	
+	@POST
+	@Path("/")
+	@Consumes("application/json")
+	//@Produces("application/json")
+	public void addNew(Platform platform) throws URISyntaxException, SQLException {	
+		int id = PlatformsDataAccess.insertNewPlatform(platform);
+		platform.setId(id);
+		processResponse();
+		response.addHeader("Location", "/platforms/" + id);
+		response.setStatus(201);
 	}
 	
 }
