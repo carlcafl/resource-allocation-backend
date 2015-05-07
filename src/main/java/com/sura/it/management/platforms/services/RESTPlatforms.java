@@ -51,7 +51,6 @@ public class RESTPlatforms extends RESTService {
 		platform.setId(id);
 		return Response.status(Response.Status.CREATED)
 				.header("Location", "/platforms/" + id)
-				.header("Prueba", "/platforms/" + id)
 				.entity("/platforms/" + id).build();
 	}
 
