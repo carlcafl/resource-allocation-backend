@@ -11,6 +11,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.sura.it.management.platforms.dataAccess.PlatformsDataAccess;
 import com.sura.it.management.platforms.model.Platform;
@@ -22,8 +24,7 @@ public class RESTPlatforms extends RESTService {
   
 	@GET
 	@Path("/")
-	//@Consumes( "application/json" )
-	@Produces( "application/json" ) 
+	@Produces( MediaType.APPLICATION_JSON ) 
 	public List<Platform> listPlatforms() throws URISyntaxException, SQLException {
 		List<Platform> list = new ArrayList<Platform>();
 
@@ -34,8 +35,7 @@ public class RESTPlatforms extends RESTService {
 
 	@GET
 	@Path("/{id}")
-	//@Consumes( "application/json" )
-	@Produces( "application/json" ) 
+	@Produces( MediaType.APPLICATION_JSON ) 
 	public Platform getPlatform(@PathParam("id") int id) throws URISyntaxException, SQLException {
 		processResponse();
 		return PlatformsDataAccess.getPlatformById(id);
@@ -43,14 +43,14 @@ public class RESTPlatforms extends RESTService {
 	
 	@POST
 	@Path("/")
-	@Consumes("application/json")
-	//@Produces("application/json")
-	public void addNew(Platform platform) throws URISyntaxException, SQLException {	
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_HTML)
+	public Response addNew(Platform platform) throws URISyntaxException, SQLException {	
 		int id = PlatformsDataAccess.insertNewPlatform(platform);
 		platform.setId(id);
 		processResponse();
 		response.addHeader("Location", "/platforms/" + id);
-		response.setStatus(201);
+		return Response.status(201).entity("/platforms/" + id).build();
 	}
 	
 }

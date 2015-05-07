@@ -1,8 +1,8 @@
 package com.sura.it.management.platforms.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.ArrayList;;
 
 public class Project {
 
