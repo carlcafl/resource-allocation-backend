@@ -16,7 +16,7 @@ public class PlatformsDataAccess {
 	private static final String GET_PLATFORMS_BY_ID_SQL = "SELECT * FROM tblPlatforms WHERE id = ";
 	private static final String INSERT_PLATFORM_SQL = "INSERT INTO tblPlatforms (shortName, fullName, department, owner, ownerEmail) VALUES ({{values}}) RETURNING id";
 
-	public static List<Platform> listPlatforms() throws URISyntaxException, SQLException {
+	public static List<Platform> listAll() throws URISyntaxException, SQLException {
 		List<Platform> list = new ArrayList<Platform>();
 
 		Connection connection = null;
@@ -44,13 +44,13 @@ public class PlatformsDataAccess {
 		return list;
 	}
 	
-	public static Platform getPlatformById(int id) throws URISyntaxException, SQLException {
+	public static Platform getById(int id) throws URISyntaxException, SQLException {
 		Platform platform = null;
 
 		Connection connection = null;
 		try {
 			connection = DataServiceHelper.getInstance().getConnection();
-			platform = getPlatformById(id, connection);
+			platform = getById(id, connection);
 		} finally {
 			if (connection != null)
 				try {
@@ -61,7 +61,7 @@ public class PlatformsDataAccess {
 		return platform;
 	}
 	
-	protected static Platform getPlatformById(int id, Connection connection) throws URISyntaxException, SQLException {
+	protected static Platform getById(int id, Connection connection) throws URISyntaxException, SQLException {
 		Platform platform = null;
 
 			Statement stmt = connection.createStatement();
@@ -79,7 +79,7 @@ public class PlatformsDataAccess {
 		return platform;
 	}
 	
-	public static int insertNewPlatform(Platform platform) throws URISyntaxException, SQLException {
+	public static int insertNew(Platform platform) throws URISyntaxException, SQLException {
 		int id = 0;
 
 		Connection connection = null;

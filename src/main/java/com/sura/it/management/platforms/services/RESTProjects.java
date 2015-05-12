@@ -22,7 +22,7 @@ public class RESTProjects extends RESTService {
 	public List<Project> listProjects() throws URISyntaxException, SQLException {
 		List<Project> list = new ArrayList<Project>();
 
-		list = ProjectsDataAccess.listProjects();
+		list = ProjectsDataAccess.listAll();
 		
 		processResponse();
 		return list;

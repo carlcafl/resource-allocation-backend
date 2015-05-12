@@ -20,3 +20,18 @@ insert into tblProjects (name, projectType, startDate, endDate, size, platformId
 ('Asistencia', 2, date '2015-04-01', null, 'XL', 3, 'Edwin Salinas', 'esalinas@sura.com.co' ,'P'),
 ('Nuevo modelo de negocio CGR', 1, date '2014-05-12', null, 'XL', 4, 'Dubier Estrada', 'destrada@sura.com.co' ,'P')
 ;
+
+insert into tblPlatformCapacity(platformId, startDate, endDate, maintenanceCapacity, supportCapacity) values
+(5, date '2015-01-01', null, 1.6, 0.4)
+;
+
+insert into tblPlatformProjectConfig(platformId, projectSize, capacity) values
+(5, 'S', 0.25),
+(5, 'M', 0.3),
+(5, 'L', 0.6),
+(5, 'XL', 1)
+;
+
+insert into tblPlatformProjectCapacity(capacityId, teamMemberName, role, capacity) values
+(1, 'Johan Miguel Ruíz Rodríguez', 'Architect', 1)
+;

@@ -28,7 +28,7 @@ public class RESTPlatforms extends RESTService {
 	public List<Platform> listPlatforms() throws URISyntaxException, SQLException {
 		List<Platform> list = new ArrayList<Platform>();
 
-		list = PlatformsDataAccess.listPlatforms();
+		list = PlatformsDataAccess.listAll();
 		processResponse();
 		return list;
 	}
@@ -38,7 +38,7 @@ public class RESTPlatforms extends RESTService {
 	@Produces( MediaType.APPLICATION_JSON ) 
 	public Platform getPlatform(@PathParam("id") int id) throws URISyntaxException, SQLException {
 		processResponse();
-		return PlatformsDataAccess.getPlatformById(id);
+		return PlatformsDataAccess.getById(id);
 	}
 	
 	@POST
@@ -47,7 +47,7 @@ public class RESTPlatforms extends RESTService {
 	@Produces(MediaType.TEXT_HTML)
 	public Response addNew(Platform platform) throws URISyntaxException, SQLException {	
 		processResponse();
-		int id = PlatformsDataAccess.insertNewPlatform(platform);
+		int id = PlatformsDataAccess.insertNew(platform);
 		platform.setId(id);
 		return Response.status(Response.Status.CREATED)
 				.header("Location", "/platforms/" + id)

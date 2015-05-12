@@ -1,26 +1,47 @@
 package com.sura.it.management.platforms.model;
 
+import java.util.Hashtable;
+import java.util.List;
+
+import com.sura.it.management.platforms.model.enumerations.ProjectSize;
+
 public class PlatformCapacity {
 
 	private Platform platform = null;
-	private int year;
-	private float capacity;
+	private float maintenanceCapacity;
+	private float supportCapacity;
+	private List<ProjectTeamMember> projectCapacity;
+	private Hashtable<ProjectSize,Float> capacityConfiguration;
+	
 	public Platform getPlatform() {
 		return platform;
 	}
 	public void setPlatform(Platform platform) {
 		this.platform = platform;
 	}
-	public int getYear() {
-		return year;
+	public float getMaintenanceCapacity() {
+		return maintenanceCapacity;
 	}
-	public void setYear(int year) {
-		this.year = year;
+	public void setMaintenanceCapacity(float maintenanceCapacity) {
+		this.maintenanceCapacity = maintenanceCapacity;
 	}
-	public float getCapacity() {
-		return capacity;
+	public float getSupportCapacity() {
+		return supportCapacity;
 	}
-	public void setCapacity(float capacity) {
-		this.capacity = capacity;
+	public void setSupportCapacity(float supportCapacity) {
+		this.supportCapacity = supportCapacity;
 	}
+	public List<ProjectTeamMember> getProjectCapacity() {
+		return projectCapacity;
+	}
+	public void setProjectCapacity(List<ProjectTeamMember> projectCapacity) {
+		this.projectCapacity = projectCapacity;
+	}
+	public Hashtable<ProjectSize,Float> getCapacityConfiguration() {
+		return capacityConfiguration;
+	}
+	public void setCapacityConfiguration(Hashtable<ProjectSize,Float> capacityConfiguration) {
+		this.capacityConfiguration = capacityConfiguration;
+	}
+	
 }

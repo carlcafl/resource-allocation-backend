@@ -1,6 +1,10 @@
 package com.sura.it.management.platforms.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import com.sura.it.management.platforms.model.enumerations.ProjectSize;
 
 public class ProjectPlatform {
 
@@ -8,6 +12,8 @@ public class ProjectPlatform {
 	private ProjectSize size;
 	private Date start;
 	private Date finish;
+	private List<ProjectTeamMember> teamMembers;
+	
 	public Platform getPlatform() {
 		return platform;
 	}
@@ -31,5 +37,16 @@ public class ProjectPlatform {
 	}
 	public void setFinish(Date finish) {
 		this.finish = finish;
+	}
+	public List<ProjectTeamMember> getTeamMembers() {
+		return teamMembers;
+	}
+	public void setTeamMembers(List<ProjectTeamMember> teamMembers) {
+		this.teamMembers = teamMembers;
+	}
+	public void addTeamMember(ProjectTeamMember teamMember) {
+		if (this.getTeamMembers() == null)
+			this.setTeamMembers(new ArrayList<ProjectTeamMember>());
+		this.getTeamMembers().add(teamMember);
 	}
 }

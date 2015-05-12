@@ -4,17 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.sura.it.management.platforms.model.enumerations.ProjectSize;
+import com.sura.it.management.platforms.model.enumerations.ProjectStatus;
+
 public class Project {
 
 	private int id;
 	private String name;
+	private ProjectType projectType;
 	private Platform leaderPlatform;
 	private String leadAnalyst;
 	private String leadAnalystEmail;
 	private Date start;
 	private Date finish;
-	//TODO: Definir tipo de dato
-	private String status;
+	private ProjectStatus status;	
 	private ProjectSize size;
 	private List<ProjectPlatform> platformsInvolved;
 	
@@ -77,5 +80,17 @@ public class Project {
 	}
 	public void setLeadAnalystEmail(String leadAnalystEmail) {
 		this.leadAnalystEmail = leadAnalystEmail;
+	}
+	public ProjectType getProjectType() {
+		return projectType;
+	}
+	public void setProjectType(ProjectType projectType) {
+		this.projectType = projectType;
+	}
+	public ProjectStatus getStatus() {
+		return status;
+	}
+	public void setStatus(ProjectStatus status) {
+		this.status = status;
 	}
 }
