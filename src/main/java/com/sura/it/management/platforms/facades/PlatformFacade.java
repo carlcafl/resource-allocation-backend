@@ -1,9 +1,13 @@
 package com.sura.it.management.platforms.facades;
 
+import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import com.sura.it.management.platforms.dataAccess.CapacityDataAccess;
+import com.sura.it.management.platforms.dataAccess.PlatformsDataAccess;
 import com.sura.it.management.platforms.model.Platform;
 import com.sura.it.management.platforms.model.PlatformCapacity;
 import com.sura.it.management.platforms.model.ProjectTeamMember;
@@ -12,11 +16,15 @@ import com.sura.it.management.platforms.model.enumerations.TeamMemberRole;
 
 public class PlatformFacade {
 	
-	public static PlatformCapacity getCurrentCapacity(Platform platform) {
-		PlatformCapacity capacity = new PlatformCapacity();
-		capacity.setPlatform(platform);
-		capacity.setMaintenanceCapacity(0.4f);
-		capacity.setSupportCapacity(1.6f);
+	public static PlatformCapacity getCurrentCapacity(Platform platform) throws URISyntaxException, SQLException {
+//		PlatformCapacity capacity = new PlatformCapacity();
+//		capacity.setPlatform(platform);
+//		capacity.setMaintenanceCapacity(0.4f);
+//		capacity.setSupportCapacity(1.6f);
+		PlatformCapacity capacity = CapacityDataAccess.getByPlatformId(platform.getId()); 
+		if (capacity==null) {
+			throw new SQLException("No se encontró capacidad configurada para la plataforma " + platform.getName());
+		}
 		
 		List<ProjectTeamMember> projectCapacity = new ArrayList<ProjectTeamMember>();
 		

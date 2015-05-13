@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DataServiceHelper {
 
@@ -20,7 +21,12 @@ public class DataServiceHelper {
 	}
 
 	public Connection getConnection() throws URISyntaxException, SQLException {
-		URI dbUri = new URI(System.getenv("DATABASE_URL"));
+		//TODO: Eliminar. Buscar opción para pruebas
+		String dbURL = System.getenv("DATABASE_URL");
+		if (dbURL==null) {
+			dbURL = "postgres://nhdszqrzsjqvrx:b7HQcMK2oRXcFvdR8t9erWhe-b@ec2-54-163-238-169.compute-1.amazonaws.com:5432/ddeelfaukkgi7j";
+		}		
+		URI dbUri = new URI(dbURL);
 
 		String username = dbUri.getUserInfo().split(":")[0];
 		String password = dbUri.getUserInfo().split(":")[1];
@@ -28,8 +34,12 @@ public class DataServiceHelper {
 
 		String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + port
 				+ dbUri.getPath();
-
-		return DriverManager.getConnection(dbUrl, username, password);
+		
+		Properties props = new Properties();
+		props.put("user", username);
+		props.put("password", password);
+		props.put("sslmode","require");
+		return DriverManager.getConnection(dbUrl, props);
 	}
 
 }

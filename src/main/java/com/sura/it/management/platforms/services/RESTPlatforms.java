@@ -16,12 +16,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.sura.it.management.platforms.dataAccess.PlatformsDataAccess;
+import com.sura.it.management.platforms.facades.PlatformFacade;
 import com.sura.it.management.platforms.model.Platform;
+import com.sura.it.management.platforms.model.PlatformCapacity;
 
 @Path("/platforms")
 public class RESTPlatforms extends RESTService {
 
-  
+	@OPTIONS
+	@Path("/")
+	public Response doOptions() {
+		processResponse();
+		return Response.ok().build();
+	}
+	
 	@GET
 	@Path("/")
 	@Produces( MediaType.APPLICATION_JSON ) 
@@ -54,11 +62,13 @@ public class RESTPlatforms extends RESTService {
 				.entity("/platforms/" + id).build();
 	}
 
-	@OPTIONS
-	@Path("/")
-	public Response doOptions() {
-		processResponse();
-		return Response.ok().build();
+	@GET
+	@Path("/{id}/capacity")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public PlatformCapacity getCapacity(Platform platform)  throws URISyntaxException, SQLException {
+		PlatformCapacity capacity = null;
+		capacity = PlatformFacade.getCurrentCapacity(platform);
+		return capacity;
 	}
-	
 }

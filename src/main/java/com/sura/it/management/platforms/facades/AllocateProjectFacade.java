@@ -1,5 +1,8 @@
 package com.sura.it.management.platforms.facades;
 
+import java.net.URISyntaxException;
+import java.sql.SQLException;
+
 import com.sura.it.management.platforms.model.Platform;
 import com.sura.it.management.platforms.model.PlatformCapacity;
 import com.sura.it.management.platforms.model.Project;
@@ -9,7 +12,7 @@ import com.sura.it.management.platforms.model.enumerations.ProjectSize;
 
 public class AllocateProjectFacade {
 
-	public static String allocateNewProject(Project project) {
+	public static String allocateNewProject(Project project) throws URISyntaxException, SQLException {
 		String messages = "";
 		for (ProjectPlatform platform: project.getPlatformsInvolved()) {
 			System.out.println("Allocando plataforma " + platform.getPlatform().getName());
@@ -41,21 +44,21 @@ public class AllocateProjectFacade {
 		return messages;		
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws URISyntaxException, SQLException {
 		
 		Platform platform1 = new Platform();
 		platform1.setName("Plataforma 1");
-		platform1.setId(1);
+		platform1.setId(5);
 		platform1.setShortName("PLAT_1");
 
 		Platform platform2 = new Platform();
 		platform2.setName("Plataforma 2");
-		platform2.setId(2);
+		platform2.setId(5);
 		platform2.setShortName("PLAT_2");
 	
 		Platform platform3 = new Platform();
 		platform3.setName("Plataforma 3");
-		platform3.setId(3);
+		platform3.setId(5);
 		platform3.setShortName("PLAT_3");
 
 		
