@@ -30,7 +30,14 @@ public class RESTPlatforms extends RESTService {
 		processResponse();
 		return Response.ok().build();
 	}
-	
+
+	@OPTIONS
+	@Path("/{id}")
+	public Response doOptions(@PathParam("id") int id) {
+		processResponse();
+		return Response.ok().build();
+	}
+
 	@GET
 	@Path("/")
 	@Produces( MediaType.APPLICATION_JSON ) 
