@@ -15,7 +15,7 @@ public class PlatformsDataAccess {
 	private static final String LIST_PLATFORMS_SQL = "SELECT * FROM tblPlatforms";
 	private static final String GET_PLATFORMS_BY_ID_SQL = "SELECT * FROM tblPlatforms WHERE id = ";
 	private static final String INSERT_PLATFORM_SQL = "INSERT INTO tblPlatforms (shortName, fullName, department, owner, ownerEmail) VALUES ({{values}}) RETURNING id";
-	private static final String UPDATE_PLATFORM_SQL = "UPDATE tblPlatforms SET shortName = '{{shortName}}', fullName = '{{fullName}}', department = '{{department}}', owner = '{{owner}}', ownerEmail = '{{ownerEmail}}') WHERE id = ";
+	private static final String UPDATE_PLATFORM_SQL = "UPDATE tblPlatforms SET shortName = '{{shortName}}', fullName = '{{fullName}}', department = '{{department}}', owner = '{{owner}}', ownerEmail = '{{ownerEmail}}' WHERE id = ";
 
 	public static List<Platform> listAll() throws URISyntaxException, SQLException {
 		List<Platform> list = new ArrayList<Platform>();

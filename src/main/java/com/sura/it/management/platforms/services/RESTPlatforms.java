@@ -69,6 +69,7 @@ public class RESTPlatforms extends RESTService {
 	@Produces(MediaType.TEXT_HTML)
 	public Response update(@PathParam("id") int id, Platform platform) throws URISyntaxException, SQLException {
 		processResponse();
+		platform.setId(id);
 		PlatformsDataAccess.update(platform);
 		return Response.status(Response.Status.OK)
 				.entity("/platforms/" + id).build();
