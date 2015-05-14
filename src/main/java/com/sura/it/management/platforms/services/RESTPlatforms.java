@@ -64,7 +64,6 @@ public class RESTPlatforms extends RESTService {
 
 	@GET
 	@Path("/{id}/capacity")
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public PlatformCapacity getCapacity(@PathParam("id") int id)  throws URISyntaxException, SQLException {
 		PlatformCapacity capacity = null;
