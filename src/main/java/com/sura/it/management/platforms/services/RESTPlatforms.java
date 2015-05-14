@@ -66,6 +66,7 @@ public class RESTPlatforms extends RESTService {
 	@Path("/{id}/capacity")
 	@Produces(MediaType.APPLICATION_JSON)
 	public PlatformCapacity getCapacity(@PathParam("id") int id)  throws URISyntaxException, SQLException {
+		processResponse();
 		PlatformCapacity capacity = null;
 		Platform platform = new Platform();
 		platform.setId(id);
