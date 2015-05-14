@@ -22,9 +22,10 @@ public class PlatformFacade {
 //		capacity.setMaintenanceCapacity(0.4f);
 //		capacity.setSupportCapacity(1.6f);
 		PlatformCapacity capacity = CapacityDataAccess.getByPlatformId(platform.getId()); 
-		/*if (capacity==null) {
-			throw new SQLException("No se encontró capacidad configurada para la plataforma " + platform.getName());
-		}*/
+		if (capacity==null) {
+			return capacity;
+			//throw new SQLException("No se encontró capacidad configurada para la plataforma " + platform.getName());
+		}
 		
 		List<ProjectTeamMember> projectCapacity = new ArrayList<ProjectTeamMember>();
 		
