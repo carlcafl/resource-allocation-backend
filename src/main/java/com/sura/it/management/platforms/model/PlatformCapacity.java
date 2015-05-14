@@ -7,6 +7,7 @@ import com.sura.it.management.platforms.model.enumerations.ProjectSize;
 
 public class PlatformCapacity {
 
+	private int id;
 	private Platform platform = null;
 	private float maintenanceCapacity;
 	private float supportCapacity;
@@ -42,6 +43,12 @@ public class PlatformCapacity {
 	}
 	public void setCapacityConfiguration(Hashtable<ProjectSize,Float> capacityConfiguration) {
 		this.capacityConfiguration = capacityConfiguration;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }
