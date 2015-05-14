@@ -9,6 +9,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -61,6 +62,18 @@ public class RESTPlatforms extends RESTService {
 				.header("Location", "/platforms/" + id)
 				.entity("/platforms/" + id).build();
 	}
+	
+	@PUT
+	@Path("/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_HTML)
+	public Response update(@PathParam("id") int id, Platform platform) throws URISyntaxException, SQLException {
+		processResponse();
+		PlatformsDataAccess.update(platform);
+		return Response.status(Response.Status.OK)
+				.entity("/platforms/" + id).build();
+	}
+	
 
 	@GET
 	@Path("/{id}/capacity")

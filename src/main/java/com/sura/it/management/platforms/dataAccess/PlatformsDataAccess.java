@@ -15,6 +15,7 @@ public class PlatformsDataAccess {
 	private static final String LIST_PLATFORMS_SQL = "SELECT * FROM tblPlatforms";
 	private static final String GET_PLATFORMS_BY_ID_SQL = "SELECT * FROM tblPlatforms WHERE id = ";
 	private static final String INSERT_PLATFORM_SQL = "INSERT INTO tblPlatforms (shortName, fullName, department, owner, ownerEmail) VALUES ({{values}}) RETURNING id";
+	private static final String UPDATE_PLATFORM_SQL = "UPDATE tblPlatforms SET shortName = '{{shortName}}', fullName = '{{fullName}}', department = '{{department}}', owner = '{{owner}}', ownerEmail = '{{ownerEmail}}') WHERE id = ";
 
 	public static List<Platform> listAll() throws URISyntaxException, SQLException {
 		List<Platform> list = new ArrayList<Platform>();
@@ -101,5 +102,31 @@ public class PlatformsDataAccess {
 				}
 		}
 		return id;
+	}	
+
+	public static void update(Platform platform) throws URISyntaxException, SQLException {
+		int id = 0;
+
+		Connection connection = null;
+		try {
+			connection = DataServiceHelper.getInstance().getConnection();
+			Statement stmt = connection.createStatement();
+			
+			String sql = UPDATE_PLATFORM_SQL + platform.getId();			
+			sql = sql.replace("{{shortName}}", platform.getShortName());
+			sql = sql.replace("{{fullName}}", platform.getName());
+			sql = sql.replace("{{department}}", platform.getDepartment());
+			sql = sql.replace("{{owner}}", platform.getOwner());
+			sql = sql.replace("{{ownerEmail}}", platform.getOwnerEmail());
+			
+			boolean success = stmt.execute(sql);
+			
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
+		}
 	}	
 }
