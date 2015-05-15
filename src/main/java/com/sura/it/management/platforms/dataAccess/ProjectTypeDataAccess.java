@@ -64,7 +64,7 @@ public class ProjectTypeDataAccess {
 			while (rs.next()) {
 				projectType = new ProjectType();
 				projectType.setId( rs.getInt("id") );
-				projectType.setName( rs.getString("name") );				
+				projectType.setName( rs.getString("projectType") );				
 				break;
 			}
 		return projectType;

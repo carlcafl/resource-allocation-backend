@@ -105,8 +105,6 @@ public class PlatformsDataAccess {
 	}	
 
 	public static void update(Platform platform) throws URISyntaxException, SQLException {
-		int id = 0;
-
 		Connection connection = null;
 		try {
 			connection = DataServiceHelper.getInstance().getConnection();
@@ -119,7 +117,7 @@ public class PlatformsDataAccess {
 			sql = sql.replace("{{owner}}", platform.getOwner());
 			sql = sql.replace("{{ownerEmail}}", platform.getOwnerEmail());
 			
-			boolean success = stmt.execute(sql);
+			stmt.execute(sql);
 			
 		} finally {
 			if (connection != null)
