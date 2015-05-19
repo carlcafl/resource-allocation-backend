@@ -2,14 +2,16 @@ package com.sura.it.management.platforms.facades;
 
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.sura.it.management.platforms.dataAccess.CapacityDataAccess;
 import com.sura.it.management.platforms.model.Platform;
 import com.sura.it.management.platforms.model.PlatformCapacity;
+import com.sura.it.management.platforms.model.ProjectTeamMember;
 
 public class PlatformFacade {
 	
-	public static PlatformCapacity getCurrentCapacity(Platform platform) throws URISyntaxException, SQLException {
+	public static PlatformCapacity getMaxCapacity(Platform platform) throws URISyntaxException, SQLException {
 //		PlatformCapacity capacity = new PlatformCapacity();
 //		capacity.setPlatform(platform);
 //		capacity.setMaintenanceCapacity(0.4f);
@@ -45,6 +47,15 @@ public class PlatformFacade {
 //		capacityConfiguration.put(ProjectSize.S, new Float(0.3f));
 //		
 //		capacity.setCapacityConfiguration(capacityConfiguration);
+		
+		return capacity;
+	}
+
+	public static List<ProjectTeamMember> getCurrentProjectCapacity(Platform platform) throws URISyntaxException, SQLException {
+		List<ProjectTeamMember> capacity = CapacityDataAccess.getAssignedCapacityByPlatformId(platform.getId()); 
+		if (capacity==null) {
+			return capacity;
+		}
 		
 		return capacity;
 	}

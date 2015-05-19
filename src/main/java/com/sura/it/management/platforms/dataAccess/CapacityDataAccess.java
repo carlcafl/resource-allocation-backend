@@ -21,6 +21,12 @@ public class CapacityDataAccess {
 	private static final String GET_CAPACITY_BY_ID_SQL = "SELECT * FROM tblPlatformCapacity WHERE platformId = ";
 	private static final String GET_CAPACITY_CONFIG_BY_ID_SQL = "SELECT * FROM tblPlatformProjectConfig WHERE platformId = ";
 	private static final String GET_PROJECT_CAPACITY_BY_ID_SQL = "SELECT * FROM tblPlatformProjectCapacity WHERE capacityId = ";
+	private static final String GET_PLATFORM_ASSIGNED_CAPACITY_SQL ="SELECT p.name, pbp.size,pbp.assignedCapacity,p.startDate,p.endDate,pc.platformId,ppc.teamMemberName,ppc.role " +
+																	"FROM   tblPlatformsByProject pbp, tblProjects p, tblPlatformProjectCapacity ppc, tblPlatformCapacity pc " +
+																	"WHERE  pbp.projectId = p.id " +
+																	"AND    ppc.id = pbp.teamMemberId " +
+																	"AND    pc.id = ppc.capacityId " +
+																	"AND    pc.platformId = ";
 	
 	
 	public static PlatformCapacity getByPlatformId(int platformId) throws URISyntaxException, SQLException {
@@ -89,6 +95,35 @@ public class CapacityDataAccess {
 			configuration.put(size, capacity);
 		}
 		return configuration;
+	}
+	
+	public static List<ProjectTeamMember> getAssignedCapacityByPlatformId(int platformId) throws URISyntaxException, SQLException {
+		List<ProjectTeamMember> teamMembers = new ArrayList<ProjectTeamMember>();
+
+		Connection connection = null;
+		try {
+			connection = DataServiceHelper.getInstance().getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(GET_PLATFORM_ASSIGNED_CAPACITY_SQL + Integer.toString(platformId));
+			while (rs.next()) {
+				ProjectTeamMember member = new ProjectTeamMember();
+				member.setName(rs.getString("teamMemberName"));
+				member.setRole(TeamMemberRole.valueOf(rs.getString("role")));
+				member.setCapacity(rs.getFloat("assignedCapacity"));
+				member.setProjectName(rs.getString("name"));
+				member.setProjectSize(ProjectSize.valueOf(rs.getString("size")));
+				member.setStart(rs.getDate("startDate"));
+				member.setEnd(rs.getDate("endDate"));
+				teamMembers.add(member);
+			}
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
+		}
+		return teamMembers;
 	}
 	
 }

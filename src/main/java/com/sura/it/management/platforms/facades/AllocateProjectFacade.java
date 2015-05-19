@@ -21,7 +21,7 @@ public class AllocateProjectFacade {
 			//platform.getStart();
 			//platform.getFinish();
 			
-			PlatformCapacity capacity = PlatformFacade.getCurrentCapacity(platform.getPlatform());
+			PlatformCapacity capacity = PlatformFacade.getMaxCapacity(platform.getPlatform());
 			Float capacityNumber = capacity.getCapacityConfiguration().get(platform.getSize());
 			if (capacityNumber == null) {
 				messages += "La plataforma " + platform.getPlatform().getName() + " no posee configuración de capacidad para proyectos talla " + platform.getSize() + "\n";				

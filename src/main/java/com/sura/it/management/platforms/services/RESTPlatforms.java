@@ -16,10 +16,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.sura.it.management.platforms.dataAccess.CapacityDataAccess;
 import com.sura.it.management.platforms.dataAccess.PlatformsDataAccess;
 import com.sura.it.management.platforms.facades.PlatformFacade;
 import com.sura.it.management.platforms.model.Platform;
 import com.sura.it.management.platforms.model.PlatformCapacity;
+import com.sura.it.management.platforms.model.ProjectTeamMember;
 
 @Path("/platforms")
 public class RESTPlatforms extends RESTService {
@@ -91,7 +93,20 @@ public class RESTPlatforms extends RESTService {
 		PlatformCapacity capacity = null;
 		Platform platform = new Platform();
 		platform.setId(id);
-		capacity = PlatformFacade.getCurrentCapacity(platform);
+		capacity = PlatformFacade.getMaxCapacity(platform);
 		return capacity;
 	}
+	
+	@GET
+	@Path("/{id}/capacity/assigned")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<ProjectTeamMember> getAssignedCapacity(@PathParam("id") int id)  throws URISyntaxException, SQLException {
+		processResponse();
+		List<ProjectTeamMember> teamMembers = new ArrayList<ProjectTeamMember>();
+		Platform platform = new Platform();
+		platform.setId(id);
+		teamMembers = PlatformFacade.getCurrentProjectCapacity(platform);
+		return teamMembers;
+	}
+	
 }
