@@ -16,7 +16,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.sura.it.management.platforms.dataAccess.CapacityDataAccess;
 import com.sura.it.management.platforms.dataAccess.PlatformsDataAccess;
 import com.sura.it.management.platforms.facades.PlatformFacade;
 import com.sura.it.management.platforms.model.Platform;
