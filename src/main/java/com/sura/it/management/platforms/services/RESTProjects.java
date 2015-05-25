@@ -13,8 +13,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.sura.it.management.platforms.dataAccess.ProjectTypeDataAccess;
 import com.sura.it.management.platforms.dataAccess.ProjectsDataAccess;
 import com.sura.it.management.platforms.model.Project;
+import com.sura.it.management.platforms.model.ProjectType;
 
 @Path("/projects")
 public class RESTProjects extends RESTService {
@@ -55,5 +57,17 @@ public class RESTProjects extends RESTService {
 		
 		processResponse();
 		return project;
+	}
+
+	@GET
+	@Path("/types")
+	@Produces( MediaType.APPLICATION_JSON ) 
+	public List<ProjectType> getProjectTypes() throws URISyntaxException, SQLException {
+		List<ProjectType> projectTypes = new ArrayList<ProjectType>();
+		
+		projectTypes = ProjectTypeDataAccess.listAll();
+		
+		processResponse();
+		return projectTypes;
 	}
 }
