@@ -51,7 +51,7 @@ public class RESTProjects extends RESTService {
 	public Project getProject(@PathParam("id") int id) throws URISyntaxException, SQLException {
 		Project project = new Project();
 		
-		//list = ProjectsDataAccess.listAll();
+		project = ProjectsDataAccess.getById(id);
 		
 		processResponse();
 		return project;
