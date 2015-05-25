@@ -9,6 +9,6 @@ create table tblPlatformProjectConfig(id serial NOT NULL primary key, platformId
 drop table tblPlatformProjectCapacity cascade;
 create table tblPlatformProjectCapacity(id serial NOT NULL primary key, capacityId int not null references tblPlatformCapacity(id), teamMemberName varchar(100) not null, role varchar(30), capacity numeric(5,2) not null);
 drop table tblProjects cascade;
-create table tblProjects(id serial NOT NULL primary key, name varchar(50) NOT NULL, projectType int not null references tblProjectTypes(id), startDate date NOT NULL, endDate date,  size varchar(2) not null, platformId int not null references tblPlatforms(id), leadAnalyst varchar(50) not null, leadAnalystEmail varchar(50) not null, status varchar(1) not null);
+create table tblProjects(id serial NOT NULL primary key, name varchar(50) NOT NULL, projectType int not null references tblProjectTypes(id), startDate date NOT NULL, endDate date,  size varchar(2) not null, platformId int not null references tblPlatforms(id), leadAnalyst varchar(50) not null, leadAnalystEmail varchar(50) not null, status varchar(20) not null);
 drop table tblPlatformsByProject;
 create table tblPlatformsByProject(id serial NOT NULL primary key, projectId int not null references tblProjects(id), teamMemberId int not null references tblPlatformProjectCapacity(id), size varchar(2) not null, assignedCapacity numeric(5,2) not null)

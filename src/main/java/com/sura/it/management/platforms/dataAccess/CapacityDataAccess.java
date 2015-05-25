@@ -109,20 +109,7 @@ public class CapacityDataAccess {
 		Connection connection = null;
 		try {
 			connection = DataServiceHelper.getInstance().getConnection();
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery(GET_PLATFORM_ASSIGNED_CAPACITY_SQL + Integer.toString(platformId));
-			while (rs.next()) {
-				ProjectTeamMember member = new ProjectTeamMember();
-				member.setId(rs.getInt("id"));
-				member.setName(rs.getString("teamMemberName"));
-				member.setRole(TeamMemberRole.valueOf(rs.getString("role")));
-				member.setCapacity(rs.getFloat("assignedCapacity"));
-				member.setProjectName(rs.getString("name"));
-				member.setProjectSize(ProjectSize.valueOf(rs.getString("size")));
-				member.setStart(rs.getDate("startDate"));
-				member.setEnd(rs.getDate("endDate"));
-				teamMembers.add(member);
-			}
+			teamMembers = getAssignedCapacityByPlatformId(platformId, connection);
 		} finally {
 			if (connection != null)
 				try {
@@ -132,27 +119,34 @@ public class CapacityDataAccess {
 		}
 		return teamMembers;
 	}
-	
-	public static List<ProjectTeamMember> getAssignedCapacityByTeamMember(int teamMemberId) throws URISyntaxException, SQLException {
+
+	public static List<ProjectTeamMember> getAssignedCapacityByPlatformId(int platformId, Connection connection) throws URISyntaxException, SQLException {
 		List<ProjectTeamMember> teamMembers = new ArrayList<ProjectTeamMember>();
 
+		Statement stmt = connection.createStatement();
+		ResultSet rs = stmt.executeQuery(GET_PLATFORM_ASSIGNED_CAPACITY_SQL + Integer.toString(platformId));
+		while (rs.next()) {
+			ProjectTeamMember member = new ProjectTeamMember();
+			member.setId(rs.getInt("id"));
+			member.setName(rs.getString("teamMemberName"));
+			member.setRole(TeamMemberRole.valueOf(rs.getString("role")));
+			member.setCapacity(rs.getFloat("assignedCapacity"));
+			member.setProjectName(rs.getString("name"));
+			member.setProjectSize(ProjectSize.valueOf(rs.getString("size")));
+			member.setStart(rs.getDate("startDate"));
+			member.setEnd(rs.getDate("endDate"));
+			teamMembers.add(member);
+		}
+		return teamMembers;
+	}
+	
+	public static ProjectTeamMember getAssignedCapacityByTeamMember(int teamMemberId) throws URISyntaxException, SQLException {
+		ProjectTeamMember teamMember = new ProjectTeamMember();
+	
 		Connection connection = null;
 		try {
 			connection = DataServiceHelper.getInstance().getConnection();
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery(GET_TEAM_MEMBER_ASSIGNED_CAPACITY_SQL + Integer.toString(teamMemberId));
-			while (rs.next()) {
-				ProjectTeamMember member = new ProjectTeamMember();
-				member.setId(rs.getInt("id"));
-				member.setName(rs.getString("teamMemberName"));
-				member.setRole(TeamMemberRole.valueOf(rs.getString("role")));
-				member.setCapacity(rs.getFloat("assignedCapacity"));
-				member.setProjectName(rs.getString("name"));
-				member.setProjectSize(ProjectSize.valueOf(rs.getString("size")));
-				member.setStart(rs.getDate("startDate"));
-				member.setEnd(rs.getDate("endDate"));
-				teamMembers.add(member);
-			}
+			teamMember = getAssignedCapacityByTeamMember(teamMemberId, connection);
 		} finally {
 			if (connection != null)
 				try {
@@ -160,7 +154,27 @@ public class CapacityDataAccess {
 				} catch (SQLException e) {
 				}
 		}
-		return teamMembers;
+		return teamMember;
+		
+	}
+	public static ProjectTeamMember getAssignedCapacityByTeamMember(int teamMemberId, Connection connection) throws URISyntaxException, SQLException {
+		ProjectTeamMember teamMember = new ProjectTeamMember();
+
+		Statement stmt = connection.createStatement();
+		ResultSet rs = stmt.executeQuery(GET_TEAM_MEMBER_ASSIGNED_CAPACITY_SQL + Integer.toString(teamMemberId));
+		while (rs.next()) {
+			ProjectTeamMember member = new ProjectTeamMember();
+			member.setId(rs.getInt("id"));
+			member.setName(rs.getString("teamMemberName"));
+			member.setRole(TeamMemberRole.valueOf(rs.getString("role")));
+			member.setCapacity(rs.getFloat("assignedCapacity"));
+			member.setProjectName(rs.getString("name"));
+			member.setProjectSize(ProjectSize.valueOf(rs.getString("size")));
+			member.setStart(rs.getDate("startDate"));
+			member.setEnd(rs.getDate("endDate"));
+			break;
+		}
+		return teamMember;
 	}
 
 }

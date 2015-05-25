@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sura.it.management.platforms.model.Platform;
+import com.sura.it.management.platforms.model.ProjectPlatform;
 
 public class PlatformsDataAccess {
 
@@ -16,6 +17,11 @@ public class PlatformsDataAccess {
 	private static final String GET_PLATFORMS_BY_ID_SQL = "SELECT * FROM tblPlatforms WHERE id = ";
 	private static final String INSERT_PLATFORM_SQL = "INSERT INTO tblPlatforms (shortName, fullName, department, owner, ownerEmail) VALUES ({{values}}) RETURNING id";
 	private static final String UPDATE_PLATFORM_SQL = "UPDATE tblPlatforms SET shortName = '{{shortName}}', fullName = '{{fullName}}', department = '{{department}}', owner = '{{owner}}', ownerEmail = '{{ownerEmail}}' WHERE id = ";
+	private static final String LIST_PLATFORMS_BY_PROJECT_ID_SQL = "SELECT DISTINCT platformId " + 
+																	"FROM   tblPlatformCapacity cap, tblPlatformProjectCapacity prjCap, tblPlatformsByProject pbp " + 
+																	"WHERE  pbp.teamMemberId = prjCap.id " + 
+																	"AND    cap.id = prjCap.capacityId " + 
+																	"AND    pbp.projectId = 5";
 
 	public static List<Platform> listAll() throws URISyntaxException, SQLException {
 		List<Platform> list = new ArrayList<Platform>();
@@ -127,4 +133,28 @@ public class PlatformsDataAccess {
 				}
 		}
 	}	
+
+	public static List<ProjectPlatform> listByProjectId(int projectId) throws URISyntaxException, SQLException {
+		List<ProjectPlatform> list = new ArrayList<ProjectPlatform>();
+
+		Connection connection = null;
+		try {
+			connection = DataServiceHelper.getInstance().getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(LIST_PLATFORMS_BY_PROJECT_ID_SQL);
+			while (rs.next()) {
+				ProjectPlatform platform = new ProjectPlatform();
+				platform.setPlatform( PlatformsDataAccess.getById(rs.getInt("id"), connection) );
+				platform.setTeamMembers( CapacityDataAccess.getAssignedCapacityByPlatformId(rs.getInt("id"), connection) );
+				list.add(platform);
+			}
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
+		}
+		return list;
+	}
 }

@@ -15,11 +15,11 @@ insert into tblPlatforms(shortName, fullName, department, owner, ownerEmail) val
 ;
 
 insert into tblProjects (name, projectType, startDate, endDate, size, platformId, leadAnalyst, leadAnalystEmail, status) values
-('Evaluación del Core de Seguros', 2, date '2015-04-01', null, 'XL', 1, 'David Cardona', 'dacardona@sura.com.co' ,'P'),
-('Rediseño de modernización Autos', 4, date '2015-04-15', null, 'L', 2, 'Juan Camilo Pérez', 'jcperezh@sura.com.co' ,'P'),
-('Asistencia', 2, date '2015-04-01', null, 'XL', 3, 'Edwin Salinas', 'esalinas@sura.com.co' ,'P'),
-('Nuevo modelo de negocio CGR', 1, date '2014-05-12', null, 'XL', 4, 'Dubier Estrada', 'destrada@sura.com.co' ,'P'),
-('Nuevo procedimiento de Evaluación Médica', 3, date '2014-05-12', null, 'L', 5, 'Johan Ruíz', 'jmruiz@sura.com.co' ,'P')
+('Evaluación del Core de Seguros', 2, date '2015-04-01', null, 'XL', 1, 'David Cardona', 'dacardona@sura.com.co' ,'EnProceso'),
+('Rediseño de modernización Autos', 4, date '2015-04-15', null, 'L', 2, 'Juan Camilo Pérez', 'jcperezh@sura.com.co' ,'EnProceso'),
+('Asistencia', 2, date '2015-04-01', null, 'XL', 3, 'Edwin Salinas', 'esalinas@sura.com.co' ,'EnProceso'),
+('Nuevo modelo de negocio CGR', 1, date '2014-05-12', null, 'XL', 4, 'Dubier Estrada', 'destrada@sura.com.co' ,'EnProceso'),
+('Proyecto SEIS: Sistema de Evaluación Integral Sura', 3, date '2014-05-12', null, 'L', 5, 'Johan Ruíz', 'jmruiz@sura.com.co' ,'EnProceso')
 ;
 
 insert into tblPlatformCapacity(platformId, startDate, endDate, maintenanceCapacity, supportCapacity) values

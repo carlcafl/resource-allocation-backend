@@ -83,8 +83,7 @@ public class ProjectsDataAccess {
 				project.setLeadAnalyst( rs.getString("leadAnalyst") );
 				project.setLeadAnalystEmail(rs.getString("leadAnalystEmail"));
 				project.setStatus( ProjectStatus.valueOf(rs.getString("status")) );
-				//TODO: Leer plataformas
-				//project.setPlatformsInvolved(platformsInvolved);
+				project.setPlatformsInvolved( PlatformsDataAccess.listByProjectId( id ) );
 				break;
 			}
 		return project;
