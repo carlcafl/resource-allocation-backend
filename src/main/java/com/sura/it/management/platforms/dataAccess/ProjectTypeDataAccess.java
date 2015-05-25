@@ -26,7 +26,7 @@ public class ProjectTypeDataAccess {
 			while (rs.next()) {
 				ProjectType projectType = new ProjectType();
 				projectType.setId( rs.getInt("id") );
-				projectType.setName( rs.getString("name") );				
+				projectType.setName( rs.getString("projectType") );				
 				list.add(projectType);
 			}
 		} finally {
