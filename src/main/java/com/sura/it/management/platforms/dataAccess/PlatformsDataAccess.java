@@ -21,7 +21,7 @@ public class PlatformsDataAccess {
 																	"FROM   tblPlatformCapacity cap, tblPlatformProjectCapacity prjCap, tblPlatformsByProject pbp " + 
 																	"WHERE  pbp.teamMemberId = prjCap.id " + 
 																	"AND    cap.id = prjCap.capacityId " + 
-																	"AND    pbp.projectId = 5";
+																	"AND    pbp.projectId = ";
 
 	public static List<Platform> listAll() throws URISyntaxException, SQLException {
 		List<Platform> list = new ArrayList<Platform>();
@@ -141,7 +141,7 @@ public class PlatformsDataAccess {
 		try {
 			connection = DataServiceHelper.getInstance().getConnection();
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery(LIST_PLATFORMS_BY_PROJECT_ID_SQL);
+			ResultSet rs = stmt.executeQuery(LIST_PLATFORMS_BY_PROJECT_ID_SQL + Integer.toString(projectId));
 			while (rs.next()) {
 				ProjectPlatform platform = new ProjectPlatform();
 				platform.setPlatform( PlatformsDataAccess.getById(rs.getInt("platformId"), connection) );
