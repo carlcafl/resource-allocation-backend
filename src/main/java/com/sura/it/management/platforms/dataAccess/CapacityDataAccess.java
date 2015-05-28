@@ -163,15 +163,14 @@ public class CapacityDataAccess {
 		Statement stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(GET_TEAM_MEMBER_ASSIGNED_CAPACITY_SQL + Integer.toString(teamMemberId));
 		while (rs.next()) {
-			ProjectTeamMember member = new ProjectTeamMember();
-			member.setId(rs.getInt("id"));
-			member.setName(rs.getString("teamMemberName"));
-			member.setRole(TeamMemberRole.valueOf(rs.getString("role")));
-			member.setCapacity(rs.getFloat("assignedCapacity"));
-			member.setProjectName(rs.getString("name"));
-			member.setProjectSize(ProjectSize.valueOf(rs.getString("size")));
-			member.setStart(rs.getDate("startDate"));
-			member.setEnd(rs.getDate("endDate"));
+			teamMember.setId(rs.getInt("id"));
+			teamMember.setName(rs.getString("teamMemberName"));
+			teamMember.setRole(TeamMemberRole.valueOf(rs.getString("role")));
+			teamMember.setCapacity(rs.getFloat("assignedCapacity"));
+			teamMember.setProjectName(rs.getString("name"));
+			teamMember.setProjectSize(ProjectSize.valueOf(rs.getString("size")));
+			teamMember.setStart(rs.getDate("startDate"));
+			teamMember.setEnd(rs.getDate("endDate"));
 			break;
 		}
 		return teamMember;
