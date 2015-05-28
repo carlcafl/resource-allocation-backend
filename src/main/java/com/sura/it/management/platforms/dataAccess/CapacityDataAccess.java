@@ -140,13 +140,13 @@ public class CapacityDataAccess {
 		return teamMembers;
 	}
 	
-	public static ProjectTeamMember getAssignedCapacityByTeamMember(int teamMemberId) throws URISyntaxException, SQLException {
-		ProjectTeamMember teamMember = new ProjectTeamMember();
+	public static List<ProjectTeamMember> getAssignedCapacityByTeamMember(int teamMemberId) throws URISyntaxException, SQLException {
+		List<ProjectTeamMember> assignedProjects = new ArrayList<ProjectTeamMember>();
 	
 		Connection connection = null;
 		try {
 			connection = DataServiceHelper.getInstance().getConnection();
-			teamMember = getAssignedCapacityByTeamMember(teamMemberId, connection);
+			assignedProjects = getAssignedCapacityByTeamMember(teamMemberId, connection);
 		} finally {
 			if (connection != null)
 				try {
@@ -154,15 +154,15 @@ public class CapacityDataAccess {
 				} catch (SQLException e) {
 				}
 		}
-		return teamMember;
+		return assignedProjects;
 		
 	}
-	public static ProjectTeamMember getAssignedCapacityByTeamMember(int teamMemberId, Connection connection) throws URISyntaxException, SQLException {
-		ProjectTeamMember teamMember = new ProjectTeamMember();
-
+	public static List<ProjectTeamMember> getAssignedCapacityByTeamMember(int teamMemberId, Connection connection) throws URISyntaxException, SQLException {
+		List<ProjectTeamMember> assignedProjects = new ArrayList<ProjectTeamMember>();
 		Statement stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(GET_TEAM_MEMBER_ASSIGNED_CAPACITY_SQL + Integer.toString(teamMemberId));
 		while (rs.next()) {
+			ProjectTeamMember teamMember = new ProjectTeamMember();
 			teamMember.setId(rs.getInt("id"));
 			teamMember.setName(rs.getString("teamMemberName"));
 			teamMember.setRole(TeamMemberRole.valueOf(rs.getString("role")));
@@ -171,9 +171,9 @@ public class CapacityDataAccess {
 			teamMember.setProjectSize(ProjectSize.valueOf(rs.getString("size")));
 			teamMember.setStart(rs.getDate("startDate"));
 			teamMember.setEnd(rs.getDate("endDate"));
-			break;
+			assignedProjects.add(teamMember);
 		}
-		return teamMember;
+		return assignedProjects;
 	}
 
 }

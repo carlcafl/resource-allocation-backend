@@ -2,6 +2,7 @@ package com.sura.it.management.platforms.services;
 
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.OPTIONS;
@@ -27,7 +28,7 @@ public class RESTTeamMembers extends RESTService {
 	@GET
 	@Path("/{id}/capacity/assigned")
 	@Produces( MediaType.APPLICATION_JSON ) 
-	public ProjectTeamMember getAssignedCapacity(@PathParam("id") int id) throws URISyntaxException, SQLException {
+	public List<ProjectTeamMember> getAssignedCapacity(@PathParam("id") int id) throws URISyntaxException, SQLException {
 		processResponse();
 		return CapacityDataAccess.getAssignedCapacityByTeamMember(id);
 	}
