@@ -36,7 +36,7 @@ public class CapacityDataAccess {
 	
 	
 	public static PlatformCapacity getByPlatformId(int platformId) throws URISyntaxException, SQLException {
-		PlatformCapacity capacity = null;
+		PlatformCapacity capacity = new PlatformCapacity();
 
 		Connection connection = null;
 		try {
@@ -53,7 +53,7 @@ public class CapacityDataAccess {
 	}
 	
 	protected static PlatformCapacity getByPlatformId(int platformId, Connection connection) throws URISyntaxException, SQLException {
-		PlatformCapacity capacity = null;
+		PlatformCapacity capacity = new PlatformCapacity();
 
 		Statement stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(GET_CAPACITY_BY_ID_SQL + Integer.toString(platformId));
