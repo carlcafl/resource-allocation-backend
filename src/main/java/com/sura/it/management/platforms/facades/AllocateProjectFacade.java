@@ -25,12 +25,13 @@ public class AllocateProjectFacade {
 			
 			PlatformCapacity capacity = PlatformFacade.getMaxCapacity(platform.getPlatform());
 			Float capacityNumber = capacity.getCapacityConfiguration().get(platform.getSize());
-			if (capacityNumber == null) {
-				
+			if (capacityNumber == null) {				
 				messages.add(new ValidationMessage(MessageType.ERROR, "La plataforma " + platform.getPlatform().getName() + " no posee configuración de capacidad para proyectos talla " + platform.getSize()));				
 			} else {
 				float requiredCapacity = capacityNumber.floatValue();
+				messages.add(new ValidationMessage(MessageType.INFO,"Capacidad requerida en la plataforma " + platform.getPlatform().getName() + " = "+ capacityNumber.toString()));
 				for (ProjectTeamMember teamMember : PlatformFacade.getCurrentProjectCapacity(platform.getPlatform()) ) {
+					messages.add(new ValidationMessage(MessageType.INFO,"Encontrado " + teamMember.getName() + " con capacidad de " + teamMember.getCapacity()));
 					if (teamMember.getCapacity()>=requiredCapacity) {
 						messages.add(new ValidationMessage(MessageType.INFO, "Para la plataforma " + platform.getPlatform().getName() + " se ha asignado a " + teamMember.getName() + " con el rol " + teamMember.getRole()));
 						//TODO: Allocate Resource?						
