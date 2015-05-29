@@ -1,21 +1,15 @@
 package com.sura.it.management.platforms.tests;
 
-import java.net.URISyntaxException;
-import java.sql.SQLException;
-import java.util.List;
-
-import com.sura.it.management.platforms.dataAccess.CapacityDataAccess;
-import com.sura.it.management.platforms.facades.AllocateProjectFacade;
-import com.sura.it.management.platforms.model.Platform;
-import com.sura.it.management.platforms.model.PlatformCapacity;
-import com.sura.it.management.platforms.model.Project;
-import com.sura.it.management.platforms.model.ProjectPlatform;
-import com.sura.it.management.platforms.model.enumerations.ProjectSize;
-import com.sura.it.management.platforms.model.util.ValidationMessage;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import com.sura.it.management.platforms.facades.AllocateProjectFacade;
+import com.sura.it.management.platforms.model.Platform;
+import com.sura.it.management.platforms.model.Project;
+import com.sura.it.management.platforms.model.ProjectAllocation;
+import com.sura.it.management.platforms.model.ProjectPlatform;
+import com.sura.it.management.platforms.model.enumerations.ProjectSize;
 
 public class AllocateProjectTest extends TestCase {
 	
@@ -62,10 +56,10 @@ public class AllocateProjectTest extends TestCase {
 		pp3.setSize(ProjectSize.XL);
 		p.addPlatformInvolved(pp3);
 		
-		List<ValidationMessage> messages;
+		ProjectAllocation allocation = null;
 		try {
-			messages = AllocateProjectFacade.allocateNewProject(p);
-			System.out.println(messages);
+			allocation = AllocateProjectFacade.allocateNewProject(p);
+			System.out.println(allocation.getMessages());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

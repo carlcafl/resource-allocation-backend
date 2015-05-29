@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.sura.it.management.platforms.model.PlatformCapacity;
 import com.sura.it.management.platforms.model.Project;
+import com.sura.it.management.platforms.model.ProjectAllocation;
 import com.sura.it.management.platforms.model.ProjectPlatform;
 import com.sura.it.management.platforms.model.ProjectTeamMember;
 import com.sura.it.management.platforms.model.enumerations.ProjectSize;
@@ -16,7 +17,9 @@ import com.sura.it.management.platforms.model.util.ValidationMessage;
 
 public class AllocateProjectFacade {
 
-	public static List<ValidationMessage> allocateNewProject(Project project) throws URISyntaxException, SQLException {
+	public static ProjectAllocation allocateNewProject(Project project) throws URISyntaxException, SQLException {
+		ProjectAllocation allocation = new ProjectAllocation();
+		allocation.setProject(project);
 		List<ValidationMessage> messages = new ArrayList<ValidationMessage>();
 		for (ProjectPlatform platform: project.getPlatformsInvolved()) {
 			//TODO: Tener en cuenta fechas!
@@ -81,6 +84,7 @@ public class AllocateProjectFacade {
 				}
 			}
 		}
-		return messages;		
+		allocation.setMessages(messages);
+		return allocation;		
 	}
 }
