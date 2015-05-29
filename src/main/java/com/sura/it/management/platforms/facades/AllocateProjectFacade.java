@@ -3,12 +3,14 @@ package com.sura.it.management.platforms.facades;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import com.sura.it.management.platforms.model.PlatformCapacity;
 import com.sura.it.management.platforms.model.Project;
 import com.sura.it.management.platforms.model.ProjectPlatform;
 import com.sura.it.management.platforms.model.ProjectTeamMember;
+import com.sura.it.management.platforms.model.enumerations.ProjectSize;
 import com.sura.it.management.platforms.model.util.MessageType;
 import com.sura.it.management.platforms.model.util.ValidationMessage;
 
@@ -20,28 +22,64 @@ public class AllocateProjectFacade {
 			//TODO: Tener en cuenta fechas!
 			//platform.getStart();
 			//platform.getFinish();
-			
-			PlatformCapacity capacity = PlatformFacade.getMaxCapacity(platform.getPlatform());
-			Float capacityNumber = capacity.getCapacityConfiguration().get(platform.getSize());
-			if (capacityNumber == null) {				
-				messages.add(new ValidationMessage(MessageType.ERROR, "La plataforma " + platform.getPlatform().getName() + " no posee configuración de capacidad para proyectos talla " + platform.getSize()));				
+
+			PlatformCapacity capacity = PlatformFacade.getMaxCapacity(platform
+					.getPlatform());
+			Hashtable<ProjectSize, Float> capacityConfiguration = capacity
+					.getCapacityConfiguration();
+			if (capacityConfiguration == null) {
+				messages.add(new ValidationMessage(
+						MessageType.ERROR,
+						"La plataforma "
+								+ platform.getPlatform().getName()
+								+ " no posee configuración de capacidad para proyectos talla "
+								+ platform.getSize()));
 			} else {
-				float requiredCapacity = capacityNumber.floatValue();
-				messages.add(new ValidationMessage(MessageType.INFO,"Capacidad requerida en la plataforma " + platform.getPlatform().getName() + " = "+ capacityNumber.toString()));
-				for (ProjectTeamMember teamMember : PlatformFacade.getCurrentProjectCapacity(platform.getPlatform()) ) {
-					messages.add(new ValidationMessage(MessageType.INFO,"Encontrado " + teamMember.getName() + " con capacidad de " + teamMember.getCapacity()));
-					if (teamMember.getCapacity()>=requiredCapacity) {
-						messages.add(new ValidationMessage(MessageType.INFO, "Para la plataforma " + platform.getPlatform().getName() + " se ha asignado a " + teamMember.getName() + " con el rol " + teamMember.getRole()));
-						//TODO: Allocate Resource?						
-						platform.addTeamMember(teamMember);
-						break;
+				Float capacityNumber = capacityConfiguration.get(
+						platform.getSize());
+				if (capacityNumber == null) {
+					messages.add(new ValidationMessage(
+							MessageType.ERROR,
+							"La plataforma "
+									+ platform.getPlatform().getName()
+									+ " no posee configuración de capacidad para proyectos talla "
+									+ platform.getSize()));
+				} else {
+					float requiredCapacity = capacityNumber.floatValue();
+					messages.add(new ValidationMessage(MessageType.INFO,
+							"Capacidad requerida en la plataforma "
+									+ platform.getPlatform().getName() + " = "
+									+ capacityNumber.toString()));
+					for (ProjectTeamMember teamMember : PlatformFacade
+							.getCurrentProjectCapacity(platform.getPlatform())) {
+						messages.add(new ValidationMessage(MessageType.INFO,
+								"Encontrado " + teamMember.getName()
+										+ " con capacidad de "
+										+ teamMember.getCapacity()));
+						if (teamMember.getCapacity() >= requiredCapacity) {
+							messages.add(new ValidationMessage(
+									MessageType.INFO, "Para la plataforma "
+											+ platform.getPlatform().getName()
+											+ " se ha asignado a "
+											+ teamMember.getName()
+											+ " con el rol "
+											+ teamMember.getRole()));
+							// TODO: Allocate Resource?
+							platform.addTeamMember(teamMember);
+							break;
+						}
+					}
+					if (platform.getTeamMembers() == null
+							|| platform.getTeamMembers().size() == 0) {
+						messages.add(new ValidationMessage(
+								MessageType.ERROR,
+								"La plataforma "
+										+ platform.getPlatform().getName()
+										+ " no posee personas disponibles de capacidad para proyectos talla "
+										+ platform.getSize()));
 					}
 				}
-				if (platform.getTeamMembers()==null || platform.getTeamMembers().size()==0) {
-					messages.add(new ValidationMessage(MessageType.ERROR, "La plataforma " + platform.getPlatform().getName() + " no posee personas disponibles de capacidad para proyectos talla " + platform.getSize()));
-				}
 			}
-			
 		}
 		return messages;		
 	}

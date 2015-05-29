@@ -29,7 +29,7 @@ insert into tblPlatformCapacity(platformId, startDate, endDate, maintenanceCapac
 insert into tblPlatformProjectConfig(platformId, projectSize, capacity) values
 (5, 'S', 0.25),
 (5, 'M', 0.3),
-(5, 'L', 0.6),
+(5, 'L', 0.75),
 (5, 'XL', 1)
 ;
 
@@ -38,4 +38,4 @@ insert into tblPlatformProjectCapacity(capacityId, teamMemberName, role, capacit
 ;
 
 insert into tblPlatformsByProject(projectId, teamMemberId, size, assignedCapacity) values
-(5, 1, 'L', 0.8);
+(5, 1, 'L', 0.75);
