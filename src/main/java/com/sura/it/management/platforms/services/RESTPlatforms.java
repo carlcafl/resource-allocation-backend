@@ -104,7 +104,7 @@ public class RESTPlatforms extends RESTService {
 		List<ProjectTeamMember> teamMembers = new ArrayList<ProjectTeamMember>();
 		Platform platform = new Platform();
 		platform.setId(id);
-		teamMembers = PlatformFacade.getCurrentProjectCapacity(platform);
+		teamMembers = PlatformFacade.getAssignedProjectCapacity(platform);
 		return teamMembers;
 	}
 	
