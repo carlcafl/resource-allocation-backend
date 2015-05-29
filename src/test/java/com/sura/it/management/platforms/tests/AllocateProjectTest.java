@@ -66,7 +66,7 @@ public class AllocateProjectTest extends TestCase {
 		try {
 			messages = AllocateProjectFacade.allocateNewProject(p);
 			System.out.println(messages);
-		} catch (URISyntaxException | SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
