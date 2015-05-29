@@ -5,8 +5,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.OPTIONS;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -15,8 +17,10 @@ import javax.ws.rs.core.Response;
 
 import com.sura.it.management.platforms.dataAccess.ProjectTypeDataAccess;
 import com.sura.it.management.platforms.dataAccess.ProjectsDataAccess;
+import com.sura.it.management.platforms.facades.AllocateProjectFacade;
 import com.sura.it.management.platforms.model.Project;
 import com.sura.it.management.platforms.model.ProjectType;
+import com.sura.it.management.platforms.model.util.ValidationMessage;
 
 @Path("/projects")
 public class RESTProjects extends RESTService {
@@ -69,5 +73,13 @@ public class RESTProjects extends RESTService {
 		
 		processResponse();
 		return projectTypes;
+	}
+	
+	@POST
+	@Path("/simulation")
+	@Consumes( MediaType.APPLICATION_JSON )
+	@Produces( MediaType.APPLICATION_JSON )
+	public List<ValidationMessage> simulateAllocation(Project newProject) throws URISyntaxException, SQLException {
+		return AllocateProjectFacade.allocateNewProject(newProject);
 	}
 }

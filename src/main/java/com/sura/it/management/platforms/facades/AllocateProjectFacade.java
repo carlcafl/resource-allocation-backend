@@ -2,6 +2,8 @@ package com.sura.it.management.platforms.facades;
 
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.sura.it.management.platforms.model.Platform;
 import com.sura.it.management.platforms.model.PlatformCapacity;
@@ -9,14 +11,14 @@ import com.sura.it.management.platforms.model.Project;
 import com.sura.it.management.platforms.model.ProjectPlatform;
 import com.sura.it.management.platforms.model.ProjectTeamMember;
 import com.sura.it.management.platforms.model.enumerations.ProjectSize;
+import com.sura.it.management.platforms.model.util.MessageType;
+import com.sura.it.management.platforms.model.util.ValidationMessage;
 
 public class AllocateProjectFacade {
 
-	public static String allocateNewProject(Project project) throws URISyntaxException, SQLException {
-		String messages = "";
+	public static List<ValidationMessage> allocateNewProject(Project project) throws URISyntaxException, SQLException {
+		List<ValidationMessage> messages = new ArrayList<ValidationMessage>();
 		for (ProjectPlatform platform: project.getPlatformsInvolved()) {
-			System.out.println("Allocando plataforma " + platform.getPlatform().getName());
-			platform.getSize();
 			//TODO: Tener en cuenta fechas!
 			//platform.getStart();
 			//platform.getFinish();
@@ -24,19 +26,20 @@ public class AllocateProjectFacade {
 			PlatformCapacity capacity = PlatformFacade.getMaxCapacity(platform.getPlatform());
 			Float capacityNumber = capacity.getCapacityConfiguration().get(platform.getSize());
 			if (capacityNumber == null) {
-				messages += "La plataforma " + platform.getPlatform().getName() + " no posee configuración de capacidad para proyectos talla " + platform.getSize() + "\n";				
+				
+				messages.add(new ValidationMessage(MessageType.ERROR, "La plataforma " + platform.getPlatform().getName() + " no posee configuración de capacidad para proyectos talla " + platform.getSize()));				
 			} else {
 				float requiredCapacity = capacityNumber.floatValue();
-				for (ProjectTeamMember teamMember : capacity.getProjectCapacity()) {
+				for (ProjectTeamMember teamMember : PlatformFacade.getCurrentProjectCapacity(platform.getPlatform()) ) {
 					if (teamMember.getCapacity()>=requiredCapacity) {
-						messages += "Para la plataforma " + platform.getPlatform().getName() + " se ha asignado a " + teamMember.getName() + " con el rol " + teamMember.getRole() + "\n";
+						messages.add(new ValidationMessage(MessageType.INFO, "Para la plataforma " + platform.getPlatform().getName() + " se ha asignado a " + teamMember.getName() + " con el rol " + teamMember.getRole()));
 						//TODO: Allocate Resource?						
 						platform.addTeamMember(teamMember);
 						break;
 					}
 				}
 				if (platform.getTeamMembers()==null || platform.getTeamMembers().size()==0) {
-					messages += "La plataforma " + platform.getPlatform().getName() + " no posee personas disponibles de capacidad para proyectos talla " + platform.getSize() + "\n";
+					messages.add(new ValidationMessage(MessageType.ERROR, "La plataforma " + platform.getPlatform().getName() + " no posee personas disponibles de capacidad para proyectos talla " + platform.getSize()));
 				}
 			}
 			
@@ -84,7 +87,7 @@ public class AllocateProjectFacade {
 		pp3.setSize(ProjectSize.XL);
 		p.addPlatformInvolved(pp3);
 		
-		String messages = AllocateProjectFacade.allocateNewProject(p);
+		List<ValidationMessage> messages = AllocateProjectFacade.allocateNewProject(p);
 		System.out.println(messages);
 		
 		
