@@ -67,8 +67,12 @@ public class AllocateProjectFacade {
 											+ teamMember.getName()
 											+ " con el rol "
 											+ teamMember.getRole()));
-							// TODO: Allocate Resource?
+							// TODO: Allocate Resource? Fechas?							
+							teamMember.setCapacity(requiredCapacity);
+							teamMember.setProjectName(project.getName());
+							teamMember.setProjectSize(platform.getSize());							
 							platform.addTeamMember(teamMember);
+							
 							break;
 						}
 					}
