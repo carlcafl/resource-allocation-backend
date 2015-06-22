@@ -12,7 +12,6 @@ import javax.ws.rs.core.MediaType;
 
 import com.sura.it.management.platforms.model.Application;
 import com.sura.it.management.platforms.model.ApplicationDataBaseProperties;
-import com.sura.it.management.platforms.model.WebApplication;
 
 @Path("/applications")
 public class RESTApplications extends RESTService {
@@ -23,16 +22,17 @@ public class RESTApplications extends RESTService {
 	public List<Application> listApplications() throws URISyntaxException, SQLException {
 		List<Application> list = new ArrayList<Application>();
 
-		WebApplication app1 = new WebApplication();
+		Application app1 = new Application();
 		app1.setId(1);
+		app1.setAppType("WEB");
 		app1.setName("Asistencia");
 		app1.setProgrammingLanguage("Java");
 		app1.setSecurityType("SEUS");
 		app1.setJenkinsName("TestJenkins");
 		app1.setSourceQualityProjectURL("www.sonar.com");
 		app1.setVersionControlURL("svn.com");
-		app1.setContainerName("OC4J_ASISTENCIA");
-		app1.setContextName("/asistencia");
+		app1.setWebContainerName("OC4J_ASISTENCIA");
+		app1.setWebContextName("/asistencia");
 		app1.setServerName("mdeapsoas01");
 		ApplicationDataBaseProperties dbProperties = new ApplicationDataBaseProperties();
 		dbProperties.setDbConnectionUser("adm_asistencia");

@@ -9,6 +9,9 @@ public class Application extends Component {
 	private String versionControlURL = null;
 	private String jenkinsName = null;
 	private String sourceQualityProjectURL = null;
+	private String serverName = null;
+	private String webContainerName = null;
+	private String webContextName = null;
 
 	public String getAppType() {
 		return appType;
@@ -65,5 +68,25 @@ public class Application extends Component {
 	public void setSourceQualityProjectURL(String sourceQualityProjectURL) {
 		this.sourceQualityProjectURL = sourceQualityProjectURL;
 	}
+	
+	public String getServerName() {
+		return serverName;
+	}
+	public void setServerName(String serverName) {
+		this.serverName = serverName;
+	}
+	public String getWebContainerName() {
+		return webContainerName;
+	}
+	public void setWebContainerName(String webContainerName) {
+		this.webContainerName = webContainerName;
+	}
+	public String getWebContextName() {
+		return webContextName;
+	}
+	public void setWebContextName(String webContextName) {
+		this.webContextName = webContextName;
+	}
+	
 	
 }
