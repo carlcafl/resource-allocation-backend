@@ -44,17 +44,18 @@ public class RESTApplications extends RESTService {
 		list.add(app1);
 		
 		Application app2 = new Application();
-		app2.setId(1);
-		app2.setName("Asistencia");
+		app2.setId(2);
+		app2.setAppType("Other");
+		app2.setName("MEVI");
 		app2.setProgrammingLanguage("Java");
 		app2.setSecurityType("SEUS");
-		app2.setJenkinsName("TestJenkins");
-		app2.setSourceQualityProjectURL("www.sonar.com");
-		app2.setVersionControlURL("svn.com");
+		app2.setJenkinsName("TestJenkinsMEVI");
+		app2.setSourceQualityProjectURL("www.sonar.com/mevi");
+		app2.setVersionControlURL("svn.com/mevi");
 		ApplicationDataBaseProperties dbProperties2 = new ApplicationDataBaseProperties();
-		dbProperties2.setDbConnectionUser("adm_asistencia");
+		dbProperties2.setDbConnectionUser("adm_mevi");
 		dbProperties2.setDbInstanceName("PDN");
-		dbProperties2.setDbOwnerUser("asistencia");
+		dbProperties2.setDbOwnerUser("mevi");
 		dbProperties2.setDbType("Oracle");
 		app2.setDbProperties(dbProperties);
 		
