@@ -28,7 +28,7 @@ public class PlatformFacade {
 		for (ProjectTeamMember teamMember : capacity) {
 			for (ProjectTeamMember teamMemberConfig : maximumCapacity.getProjectCapacity()) {
 				if (teamMemberConfig.getId() == teamMember.getId()) {
-					teamMember.setCapacity( teamMemberConfig.getCapacity() - teamMember.getCapacity() );
+					teamMember.setCapacity(teamMemberConfig.getCapacity() - teamMember.getCapacity() );
 					break;
 				}
 			}

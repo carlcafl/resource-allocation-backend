@@ -27,7 +27,7 @@ public class RESTTeamMembers extends RESTService {
 
 	@GET
 	@Path("/{id}/capacity/assigned")
-	@Produces( MediaType.APPLICATION_JSON ) 
+	@Produces(MediaType.APPLICATION_JSON ) 
 	public List<ProjectTeamMember> getAssignedCapacity(@PathParam("id") int id) throws URISyntaxException, SQLException {
 		processResponse();
 		return CapacityDataAccess.getAssignedCapacityByTeamMember(id);

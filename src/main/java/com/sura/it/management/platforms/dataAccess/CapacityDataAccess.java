@@ -63,10 +63,10 @@ public class CapacityDataAccess {
 			platform.setId(platformId);
 			capacity.setPlatform(platform);
 			capacity.setId(rs.getInt("id"));
-			capacity.setMaintenanceCapacity( rs.getFloat("maintenanceCapacity") );
-			capacity.setSupportCapacity( rs.getFloat("supportCapacity") );
-			capacity.setProjectCapacity( CapacityDataAccess.getByCapacityId(capacity.getId(), connection) );
-			capacity.setCapacityConfiguration( CapacityDataAccess.getCapacityConfigById(platformId, connection) );
+			capacity.setMaintenanceCapacity(rs.getFloat("maintenanceCapacity") );
+			capacity.setSupportCapacity(rs.getFloat("supportCapacity") );
+			capacity.setProjectCapacity(CapacityDataAccess.getByCapacityId(capacity.getId(), connection) );
+			capacity.setCapacityConfiguration(CapacityDataAccess.getCapacityConfigById(platformId, connection) );
 			break;
 		}
 		return capacity;

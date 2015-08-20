@@ -17,7 +17,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.sura.it.management.platforms.dataAccess.PlatformsDataAccess;
+import com.sura.it.management.platforms.facades.ApplicationFacade;
 import com.sura.it.management.platforms.facades.PlatformFacade;
+import com.sura.it.management.platforms.model.Application;
 import com.sura.it.management.platforms.model.Platform;
 import com.sura.it.management.platforms.model.PlatformCapacity;
 import com.sura.it.management.platforms.model.ProjectTeamMember;
@@ -41,7 +43,7 @@ public class RESTPlatforms extends RESTService {
 
 	@GET
 	@Path("/")
-	@Produces( MediaType.APPLICATION_JSON ) 
+	@Produces(MediaType.APPLICATION_JSON) 
 	public List<Platform> listPlatforms() throws URISyntaxException, SQLException {
 		List<Platform> list = new ArrayList<Platform>();
 
@@ -52,7 +54,7 @@ public class RESTPlatforms extends RESTService {
 
 	@GET
 	@Path("/{id}")
-	@Produces( MediaType.APPLICATION_JSON ) 
+	@Produces(MediaType.APPLICATION_JSON) 
 	public Platform getPlatform(@PathParam("id") int id) throws URISyntaxException, SQLException {
 		processResponse();
 		return PlatformsDataAccess.getById(id);
@@ -95,7 +97,15 @@ public class RESTPlatforms extends RESTService {
 		capacity = PlatformFacade.getMaxCapacity(platform);
 		return capacity;
 	}
-	
+
+	@GET
+	@Path("/{id}/applications")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Application> getApplicationsByPlatform(@PathParam("id") int platformId)  throws URISyntaxException, SQLException {
+		processResponse();		
+		return ApplicationFacade.getApplicationsByPlatform(platformId);
+	}
+
 	@GET
 	@Path("/{id}/capacity/assigned")
 	@Produces(MediaType.APPLICATION_JSON)

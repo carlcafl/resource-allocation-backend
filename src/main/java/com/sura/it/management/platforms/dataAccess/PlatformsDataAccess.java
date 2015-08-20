@@ -144,8 +144,8 @@ public class PlatformsDataAccess {
 			ResultSet rs = stmt.executeQuery(LIST_PLATFORMS_BY_PROJECT_ID_SQL + Integer.toString(projectId));
 			while (rs.next()) {
 				ProjectPlatform platform = new ProjectPlatform();
-				platform.setPlatform( PlatformsDataAccess.getById(rs.getInt("platformId"), connection) );
-				platform.setTeamMembers( CapacityDataAccess.getAssignedCapacityByPlatformId(rs.getInt("platformId"), connection) );
+				platform.setPlatform(PlatformsDataAccess.getById(rs.getInt("platformId"), connection) );
+				platform.setTeamMembers(CapacityDataAccess.getAssignedCapacityByPlatformId(rs.getInt("platformId"), connection) );
 				list.add(platform);
 			}
 		} finally {

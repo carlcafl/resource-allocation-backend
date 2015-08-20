@@ -25,8 +25,8 @@ public class ProjectTypeDataAccess {
 			ResultSet rs = stmt.executeQuery(LIST_PROJECT_TYPES_SQL);
 			while (rs.next()) {
 				ProjectType projectType = new ProjectType();
-				projectType.setId( rs.getInt("id") );
-				projectType.setName( rs.getString("projectType") );				
+				projectType.setId(rs.getInt("id") );
+				projectType.setName(rs.getString("projectType") );				
 				list.add(projectType);
 			}
 		} finally {
@@ -63,8 +63,8 @@ public class ProjectTypeDataAccess {
 			ResultSet rs = stmt.executeQuery(GET_PROJECT_TYPES_BY_ID_SQL + Integer.toString(id));
 			while (rs.next()) {
 				projectType = new ProjectType();
-				projectType.setId( rs.getInt("id") );
-				projectType.setName( rs.getString("projectType") );				
+				projectType.setId(rs.getInt("id") );
+				projectType.setName(rs.getString("projectType") );				
 				break;
 			}
 		return projectType;

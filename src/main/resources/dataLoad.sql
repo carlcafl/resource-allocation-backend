@@ -39,3 +39,14 @@ insert into tblPlatformProjectCapacity(capacityId, teamMemberName, role, capacit
 
 insert into tblPlatformsByProject(projectId, teamMemberId, size, assignedCapacity) values
 (5, 1, 'L', 0.75);
+
+insert into tblApplications(name, platformId, applicationType, programmingLanguage, securityType, sourceControlURL, jenkinsProjectName, sourceAnalysisURL, serverName, webContainerName, webContextName, dbType, dbInstanceName, dbOwnerUser, dbConnectionUser) values 
+('MEVI', 5, 'WEB', 'Java', 'SEUS', null, null, null, null, null, null, 'Oracle', 'PDN', 'OPS$MEVI', 'OPS$ADM_MEVI'),
+('SIA', 5, 'WEB', 'Java', 'SEUS', null, null, null, null, null, null, 'Oracle', 'PDN', 'OPS$SIA', 'OPS$ADM_SIA'),
+('SGR', 5, 'WEB', 'Java', 'SEUS', null, null, null, null, null, null, 'Oracle', 'PDN', 'OPS$SGR', 'OPS$ADM_SGR'),
+('Requisitos', 5, 'WEB', 'Java', 'SEUS', null, null, null, null, null, null, 'Oracle', 'PDN', 'OPS$REQ', 'OPS$ADM_REQ'),
+('MIC', 5, 'WEB', 'PL/SQL', 'Propio', null, null, null, null, null, null, 'Oracle', 'PDN', 'ONYXCONS', 'ONYXCONS'),
+('MIC 1.5', 5, 'WEB', 'Java', 'SEUS', null, null, null, null, null, null, 'Oracle', 'PDN', 'OPS$MIC', 'OPS$ADM_MIC'),
+('MIC 2', 5, 'WEB', 'Java', 'SEUS', null, null, null, null, null, null, 'Oracle', 'PDN', 'OPS$MIC', 'OPS$ADM_MIC')
+;
+

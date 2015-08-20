@@ -42,7 +42,7 @@ public class RESTProjects extends RESTService {
 	
 	@GET
 	@Path("/")
-	@Produces( MediaType.APPLICATION_JSON ) 
+	@Produces(MediaType.APPLICATION_JSON ) 
 	public List<Project> listProjects() throws URISyntaxException, SQLException {
 		List<Project> list = new ArrayList<Project>();
 
@@ -54,7 +54,7 @@ public class RESTProjects extends RESTService {
 
 	@GET
 	@Path("/{id}")
-	@Produces( MediaType.APPLICATION_JSON ) 
+	@Produces(MediaType.APPLICATION_JSON ) 
 	public Project getProject(@PathParam("id") int id) throws URISyntaxException, SQLException {
 		Project project = new Project();
 		
@@ -66,7 +66,7 @@ public class RESTProjects extends RESTService {
 
 	@GET
 	@Path("/types")
-	@Produces( MediaType.APPLICATION_JSON ) 
+	@Produces(MediaType.APPLICATION_JSON ) 
 	public List<ProjectType> getProjectTypes() throws URISyntaxException, SQLException {
 		List<ProjectType> projectTypes = new ArrayList<ProjectType>();
 		
@@ -78,8 +78,8 @@ public class RESTProjects extends RESTService {
 	
 	@POST
 	@Path("/{id}/allocation")
-	@Consumes( MediaType.APPLICATION_JSON )
-	@Produces( MediaType.APPLICATION_JSON )
+	@Consumes(MediaType.APPLICATION_JSON )
+	@Produces(MediaType.APPLICATION_JSON )
 	public ProjectAllocation simulateAllocation(@PathParam("id") int id, List<ProjectPlatform> platformsInvolved) throws URISyntaxException, SQLException {
 		Project project = ProjectsDataAccess.getById(id);
 		project.setPlatformsInvolved(platformsInvolved);

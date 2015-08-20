@@ -12,3 +12,8 @@ drop table tblProjects cascade;
 create table tblProjects(id serial NOT NULL primary key, name varchar(50) NOT NULL, projectType int not null references tblProjectTypes(id), startDate date NOT NULL, endDate date,  size varchar(2) not null, platformId int not null references tblPlatforms(id), leadAnalyst varchar(50) not null, leadAnalystEmail varchar(50) not null, status varchar(20) not null);
 drop table tblPlatformsByProject;
 create table tblPlatformsByProject(id serial NOT NULL primary key, projectId int not null references tblProjects(id), teamMemberId int not null references tblPlatformProjectCapacity(id), size varchar(2) not null, assignedCapacity numeric(5,2) not null)
+
+drop table tblApplications;
+create table tblApplications(id serial NOT NULL primary key, name varchar(50) NOT NULL, platformId int not null references tblPlatforms(id), applicationType varchar(10) NOT NULL, programmingLanguage varchar(50), securityType varchar(10), sourceControlURL varchar(250), jenkinsProjectName varchar(250), sourceAnalysisURL varchar(250), serverName varchar(50), webContainerName varchar(50), webContextName varchar(50), dbType varchar(10), dbInstanceName varchar(50), dbOwnerUser varchar(30), dbConnectionUser varchar(30));
+drop table tblLibraries;
+create table tblLibraries(id serial NOT NULL primary key, name varchar(50) NOT NULL, platformId int not null references tblPlatforms(id), description varchar(250));
