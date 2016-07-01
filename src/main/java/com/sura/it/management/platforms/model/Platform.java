@@ -7,7 +7,7 @@ public class Platform {
 	private int id;
 	private String shortName;
 	private String name;
-	private String department;
+	private Department department;
 	private String owner;
 	private String ownerEmail;
 	private List<Component> components = null;
@@ -30,10 +30,10 @@ public class Platform {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDepartment() {
+	public Department getDepartment() {
 		return department;
 	}
-	public void setDepartment(String department) {
+	public void setDepartment(Department department) {
 		this.department = department;
 	}
 	public String getOwner() {

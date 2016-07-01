@@ -1,13 +1,10 @@
 create type typDepartmentType AS ENUM ('GERENCIA','DIRECCION');
 drop table tblDepartments cascade;
 create table tblDepartments(id serial NOT NULL primary key, departmentType typDepartmentType NOT NULL, name varchar(30) NOT NULL, active BOOLEAN DEFAULT TRUE, parentId int);
-
-
-
 drop table tblProjectTypes cascade;
 create table tblProjectTypes(id serial NOT NULL primary key, projectType varchar(30) NOT NULL);
 drop table tblPlatforms cascade;
-create table tblPlatforms(id serial NOT NULL primary key, shortName varchar(15) NOT NULL UNIQUE, fullName varchar(100) NOT NULL, department varchar(50),  owner varchar(100), ownerEmail varchar(50));
+create table tblPlatforms(id serial NOT NULL primary key, shortName varchar(15) NOT NULL UNIQUE, fullName varchar(100) NOT NULL, department int not null references tblDepartments(id),  owner varchar(100), ownerEmail varchar(50));
 drop table tblPlatformCapacity cascade;
 create table tblPlatformCapacity(id serial NOT NULL primary key, platformId int not null references tblPlatforms(id), startDate date not null, endDate date, maintenanceCapacity numeric(5,2) not null, supportCapacity numeric(5,2) not null);
 drop table tblPlatformProjectConfig cascade;

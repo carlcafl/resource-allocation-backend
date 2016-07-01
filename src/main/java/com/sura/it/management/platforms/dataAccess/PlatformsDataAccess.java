@@ -36,7 +36,7 @@ public class PlatformsDataAccess {
 				platform.setId(rs.getInt("id"));
 				platform.setShortName(rs.getString("shortName"));
 				platform.setName(rs.getString("fullName"));
-				platform.setDepartment(rs.getString("department"));
+				platform.setDepartment(DepartmentsDataAccess.getById(rs.getInt("department")));
 				platform.setOwner(rs.getString("owner"));
 				platform.setOwnerEmail(rs.getString("ownerEmail"));
 				list.add(platform);
@@ -78,7 +78,7 @@ public class PlatformsDataAccess {
 				platform.setId(rs.getInt("id"));
 				platform.setShortName(rs.getString("shortName"));
 				platform.setName(rs.getString("fullName"));
-				platform.setDepartment(rs.getString("department"));
+				platform.setDepartment(DepartmentsDataAccess.getById(rs.getInt("department")));
 				platform.setOwner(rs.getString("owner"));
 				platform.setOwnerEmail(rs.getString("ownerEmail"));
 				break;
@@ -119,7 +119,7 @@ public class PlatformsDataAccess {
 			String sql = UPDATE_PLATFORM_SQL + platform.getId();			
 			sql = sql.replace("{{shortName}}", platform.getShortName());
 			sql = sql.replace("{{fullName}}", platform.getName());
-			sql = sql.replace("{{department}}", platform.getDepartment());
+			sql = sql.replace("{{department}}", Integer.toString(platform.getDepartment().getId()));
 			sql = sql.replace("{{owner}}", platform.getOwner());
 			sql = sql.replace("{{ownerEmail}}", platform.getOwnerEmail());
 			
