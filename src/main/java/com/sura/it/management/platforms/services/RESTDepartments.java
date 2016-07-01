@@ -62,4 +62,15 @@ public class RESTDepartments extends RESTService {
 		processResponse();
 		return list;
 	}
+
+	@GET
+	@Path("/{id}/children")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Department> listDepartmentsByParent(@PathParam("id") int id)  throws URISyntaxException, SQLException {
+		List<Department> list = new ArrayList<Department>();
+
+		list = DepartmentsDataAccess.getByParent(id);
+		processResponse();
+		return list;
+	}
 }
