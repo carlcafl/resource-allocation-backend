@@ -1,11 +1,11 @@
 insert into tblDepartments(departmentType, name, active) values
 ('GERENCIA','TI Seguros', TRUE),
-('DIRECCION','Seguros Generales', TRUE),
-('DIRECCION','Seguros de Vida', TRUE),
-('DIRECCION','Plataformas Transversales', TRUE),
-('DIRECCION','Salud', TRUE),
-('DIRECCION','Procesos de Suscripción', TRUE),
-('DIRECCION','Modelos de Venta', TRUE)
+('DIRECCION','Seguros Generales', TRUE, 1),
+('DIRECCION','Seguros de Vida', TRUE, 1),
+('DIRECCION','Plataformas Transversales', TRUE, 1),
+('DIRECCION','Salud', TRUE, 1),
+('DIRECCION','Procesos de Suscripción', TRUE, 1),
+('DIRECCION','Modelos de Venta', TRUE, 1)
 ;
 
 

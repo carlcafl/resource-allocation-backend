@@ -1,6 +1,6 @@
 create type typDepartmentType AS ENUM ('GERENCIA','DIRECCION');
 drop table tblDepartments cascade;
-create table tblDepartments(id serial NOT NULL primary key, departmentType typDepartmentType NOT NULL, name varchar(30) NOT NULL, active BOOLEAN DEFAULT TRUE);
+create table tblDepartments(id serial NOT NULL primary key, departmentType typDepartmentType NOT NULL, name varchar(30) NOT NULL, active BOOLEAN DEFAULT TRUE, parentId int);
 
 
 

@@ -93,14 +93,14 @@ public class DepartmentsDataAccess {
 		return list;
 	}
 
-	public static Department getByParent(int id) throws URISyntaxException,
+	public static List<Department> getByParent(int id) throws URISyntaxException,
 			SQLException {
-		Department department = null;
+		List<Department> list = null;
 
 		Connection connection = null;
 		try {
 			connection = DataServiceHelper.getInstance().getConnection();
-			department = getById(id, connection);
+			list = getByParent(id, connection);
 		} finally {
 			if (connection != null)
 				try {
@@ -108,21 +108,23 @@ public class DepartmentsDataAccess {
 				} catch (SQLException e) {
 				}
 		}
-		return department;
+		return list;
 	}
 
-	protected static Department getByParent(int id, Connection connection)
+	protected static List<Department> getByParent(int id, Connection connection)
 			throws URISyntaxException, SQLException {
 		Department department = null;
+		List<Department> list = new ArrayList<Department>();
 
 		Statement stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(LIST_DEPARTMENTS_BY_PARENT_ID_SQL
 				+ Integer.toString(id));
 		while (rs.next()) {
 			department = loadObject(rs);
+			list.add(department);
 			break;
 		}
-		return department;
+		return list;
 	}
 
 	public static Department getById(int id) throws URISyntaxException,
