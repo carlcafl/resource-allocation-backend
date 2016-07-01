@@ -1,3 +1,14 @@
+insert into tblDepartments(departmentType, departmentName, active) values
+('GERENCIA','TI Seguros', TRUE),
+('DIRECCION','Seguros Generales', TRUE),
+('DIRECCION','Seguros de Vida', TRUE),
+('DIRECCION','Plataformas Transversales', TRUE),
+('DIRECCION','Salud', TRUE),
+('DIRECCION','Procesos de Suscripción', TRUE),
+('DIRECCION','Modelos de Venta', TRUE)
+;
+
+
 insert into tblProjectTypes(projectType) values
 ('Corporativo'),
 ('Estratégico'),
