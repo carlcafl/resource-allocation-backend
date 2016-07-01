@@ -122,7 +122,6 @@ public class DepartmentsDataAccess {
 		while (rs.next()) {
 			department = loadObject(rs);
 			list.add(department);
-			break;
 		}
 		return list;
 	}

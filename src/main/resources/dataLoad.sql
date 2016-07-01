@@ -1,5 +1,5 @@
-insert into tblDepartments(departmentType, name, active) values
-('GERENCIA','TI Seguros', TRUE),
+insert into tblDepartments(departmentType, name, active, parentId) values
+('GERENCIA','TI Seguros', TRUE, NULL),
 ('DIRECCION','Seguros Generales', TRUE, 1),
 ('DIRECCION','Seguros de Vida', TRUE, 1),
 ('DIRECCION','Plataformas Transversales', TRUE, 1),
