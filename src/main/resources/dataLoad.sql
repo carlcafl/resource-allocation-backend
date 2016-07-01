@@ -1,4 +1,4 @@
-insert into tblDepartments(departmentType, departmentName, active) values
+insert into tblDepartments(departmentType, name, active) values
 ('GERENCIA','TI Seguros', TRUE),
 ('DIRECCION','Seguros Generales', TRUE),
 ('DIRECCION','Seguros de Vida', TRUE),

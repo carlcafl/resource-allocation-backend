@@ -81,8 +81,8 @@ public class DepartmentsDataAccess {
 		List<Department> list = new ArrayList<Department>();
 
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery(LIST_DEPARTMENTS_BY_TYPE_SQL
-				+ departmentType);
+		ResultSet rs = stmt.executeQuery(LIST_DEPARTMENTS_BY_TYPE_SQL + "'"
+				+ departmentType + "'");
 		while (rs.next()) {
 			department = loadObject(rs);
 			list.add(department);
